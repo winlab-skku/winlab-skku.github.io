@@ -4,7 +4,7 @@ import html, re, os, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 THEME = sys.argv[1] if len(sys.argv) > 1 else "base"
-OUT = ROOT if THEME == "base" else os.path.join(ROOT, "variants", THEME)
+OUT = os.path.join(ROOT, "variants", THEME)   # final site: copy the chosen variant to the repo root
 LAB = "Wireless Intelligence Lab"
 LAB_SHORT = "WIn Lab"
 UNIV = "Sungkyunkwan University"

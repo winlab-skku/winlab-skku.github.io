@@ -1,10 +1,93 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>WIn Lab 웹사이트 디자인 시안</title>
-<style>body{font-family:system-ui,sans-serif;max-width:720px;margin:60px auto;padding:0 24px;line-height:1.6;color:#222}h1{font-weight:600}li{margin:10px 0}a{color:#1f3a93}small{color:#777}</style></head>
-<body><h1>WIn Lab 웹사이트 디자인 시안</h1>
-<p>각 링크를 열어 Home / Members / Publications / News를 둘러보세요. 내용은 네 시안 모두 동일합니다.</p>
-<ol>
-<li><a href="../index.html">현재 시안 (사이드바, 모노톤)</a> <small>— 왼쪽 고정 메뉴, 흰색·회색</small></li>
-<li><a href="theme-a/index.html">A. Navy / Serif</a> <small>— 상단 메뉴, 세리프 제목, 네이비 포인트. 정통 학술 느낌</small></li>
-<li><a href="theme-b/index.html">B. Charcoal / Teal</a> <small>— 짙은 헤더 띠, 청록 포인트, 연구분야 카드 그리드. 테크 느낌</small></li>
-<li><a href="theme-c/index.html">C. Cobalt / Centered</a> <small>— 가운데 정렬 단일 컬럼, 큰 제목, 코발트 블루 포인트. 가장 미니멀</small></li>
-</ol></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wireless Intelligence Lab — Website design options</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --panel: #f3f3f2; --ink: #161616; --ink-2: #555; --ink-3: #8a8a8a; --rule: #e2e2e0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: var(--ink); background: #fff; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 72px 32px 96px; }
+    .eyebrow { color: var(--ink-3); font-size: 0.9rem; margin: 0 0 12px; }
+    h1 { font-size: 2.4rem; font-weight: 300; letter-spacing: -0.015em; line-height: 1.15; margin: 0 0 16px; }
+    .lede { color: var(--ink-2); font-size: 1.05rem; max-width: 60ch; margin: 0 0 48px; text-wrap: pretty; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .card { display: block; color: inherit; text-decoration: none; border: 1px solid var(--rule); padding: 20px; transition: border-color 120ms ease; }
+    .card:hover, .card:focus-visible { border-color: var(--ink); outline: none; }
+    .card h2 { font-size: 1.05rem; font-weight: 500; margin: 16px 0 4px; display: flex; align-items: baseline; gap: 10px; }
+    .card h2 span { color: var(--ink-3); font-weight: 400; font-size: 0.85rem; }
+    .card p { margin: 0; color: var(--ink-2); font-size: 0.92rem; }
+    .card .open { display: inline-block; margin-top: 14px; font-size: 0.9rem; text-decoration: underline; text-decoration-color: #bdbdbb; text-underline-offset: 3px; }
+    .card:hover .open { text-decoration-color: var(--ink); }
+    /* miniature layout sketches */
+    .sketch { height: 132px; background: var(--panel); position: relative; overflow: hidden; }
+    .sketch i { position: absolute; display: block; }
+    .s1 .side { left: 0; top: 0; bottom: 0; width: 26%; background: #e6e6e4; }
+    .s1 .line { background: #cfcfcc; height: 6px; left: 34%; }
+    .s1 .head { top: 22px; width: 42%; height: 12px; background: #161616; left: 34%; }
+    .s2 .bar { top: 0; left: 0; right: 0; height: 22px; background: #fff; border-bottom: 1px solid #dfe3ea; }
+    .s2 .rule { top: 36px; left: 10%; width: 22px; height: 3px; background: #1f3a93; }
+    .s2 .head { top: 48px; left: 10%; width: 46%; height: 14px; background: #14213d; }
+    .s2 .line { background: #d3d8e2; height: 6px; left: 10%; }
+    .s3 .bar { top: 0; left: 0; right: 0; height: 22px; background: #1c1f21; }
+    .s3 .dot { top: 8px; left: 10%; width: 18px; height: 6px; background: #5eead4; border-radius: 3px; }
+    .s3 .head { top: 36px; left: 10%; width: 44%; height: 14px; background: #1c1f21; }
+    .s3 .card1, .s3 .card2 { top: 70px; height: 44px; background: #fff; border: 1px solid #e5e8e8; border-radius: 5px; width: 38%; }
+    .s3 .card1 { left: 10%; } .s3 .card2 { left: 52%; }
+    .s3 .card1::before, .s3 .card2::before { content: ""; position: absolute; left: 8px; top: 8px; width: 40%; height: 5px; background: #0f766e; }
+    .s4 .bar { top: 0; left: 0; right: 0; height: 22px; background: #fff; border-bottom: 1px solid #e4e7ec; }
+    .s4 .logo { top: 8px; left: 25%; width: 16px; height: 6px; background: #2247d6; }
+    .s4 .head { top: 38px; left: 25%; width: 40%; height: 16px; background: #101828; }
+    .s4 .line { background: #d5dae3; height: 6px; left: 25%; }
+    .swatches { display: flex; gap: 6px; margin-top: 10px; }
+    .swatches b { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); }
+    .note { margin-top: 40px; color: var(--ink-3); font-size: 0.88rem; max-width: 60ch; }
+    @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .wrap { padding: 40px 20px 64px; } h1 { font-size: 1.9rem; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Wireless Intelligence Lab · Sungkyunkwan University</p>
+  <h1>Website design options</h1>
+  <p class="lede">Four directions for the lab website. Content, pages, and structure are identical across all four; only the visual treatment differs. Open each one and browse Home, Members, Publications, and News.</p>
+
+  <div class="grid">
+    <a class="card" href="base/index.html">
+      <div class="sketch s1"><i class="side"></i><i class="head"></i><i class="line" style="top:46px;width:50%"></i><i class="line" style="top:58px;width:44%"></i><i class="line" style="top:84px;width:30%"></i><i class="line" style="top:96px;width:52%"></i></div>
+      <h2>Option 1 <span>Mono / Sidebar</span></h2>
+      <p>Fixed left navigation, white and grey only. Quiet and document-like.</p>
+      <div class="swatches"><b style="background:#161616"></b><b style="background:#f3f3f2"></b><b style="background:#8a8a8a"></b></div>
+      <span class="open">Open</span>
+    </a>
+
+    <a class="card" href="theme-a/index.html">
+      <div class="sketch s2"><i class="bar"></i><i class="rule"></i><i class="head"></i><i class="line" style="top:72px;width:54%"></i><i class="line" style="top:84px;width:46%"></i><i class="line" style="top:104px;width:34%"></i></div>
+      <h2>Option 2 <span>Navy / Serif</span></h2>
+      <p>Top navigation, serif headings, one navy accent. Classic academic, modernised.</p>
+      <div class="swatches"><b style="background:#1f3a93"></b><b style="background:#14213d"></b><b style="background:#f4f5f7"></b></div>
+      <span class="open">Open</span>
+    </a>
+
+    <a class="card" href="theme-b/index.html">
+      <div class="sketch s3"><i class="bar"></i><i class="dot"></i><i class="head"></i><i class="card1"></i><i class="card2"></i></div>
+      <h2>Option 3 <span>Charcoal / Teal</span></h2>
+      <p>Dark header band, teal accent, research areas as a card grid. Contemporary and technical.</p>
+      <div class="swatches"><b style="background:#1c1f21"></b><b style="background:#0f766e"></b><b style="background:#5eead4"></b></div>
+      <span class="open">Open</span>
+    </a>
+
+    <a class="card" href="theme-c/index.html">
+      <div class="sketch s4"><i class="bar"></i><i class="logo"></i><i class="head"></i><i class="line" style="top:66px;width:48%"></i><i class="line" style="top:78px;width:42%"></i><i class="line" style="top:100px;width:28%"></i></div>
+      <h2>Option 4 <span>Cobalt / Centered</span></h2>
+      <p>Single centered column, large type, cobalt blue accent. The most minimal of the four.</p>
+      <div class="swatches"><b style="background:#2247d6"></b><b style="background:#101828"></b><b style="background:#eef1f6"></b></div>
+      <span class="open">Open</span>
+    </a>
+  </div>
+
+  <p class="note">Any option can be adjusted after selection — colors, typography, and layout details are all editable, and elements from different options can be combined.</p>
+</div>
+</body>
+</html>
