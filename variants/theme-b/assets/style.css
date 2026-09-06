@@ -114,6 +114,49 @@ p { margin: 0 0 1.1em; max-width: var(--measure); text-wrap: pretty; }
   .person .photo, .person.prof .photo { width: 96px; }
   .fields .sub li { grid-template-columns: 1fr; }
 }
+
+/* ---- Mobile pass ---- */
+@media (max-width: 860px) {
+  html { font-size: 15.5px; }
+  body { line-height: 1.5; }
+  h1 { font-size: 1.9rem; margin-bottom: 14px; }
+  .page-home h1 { font-size: 2.1rem !important; }
+  .lede { font-size: 1.02rem; }
+  .affil { font-size: 0.9rem; }
+  .section { padding: 26px 0; gap: 6px; }
+  .section > h2 { font-size: 0.85rem; }
+  .areas li { padding: 10px 0; }
+  .areas strong { font-size: 0.98rem; }
+  .areas span { font-size: 0.9rem; }
+  .news-teaser li { grid-template-columns: 78px 1fr; gap: 10px; padding: 5px 0; font-size: 0.95rem; }
+  .news-teaser time { font-size: 0.82rem; }
+  .news li { grid-template-columns: 1fr; gap: 2px; padding: 16px 0; }
+  .news time { font-size: 0.82rem; }
+  .news h3 { font-size: 1rem; }
+  .news p { font-size: 0.92rem; }
+  /* members: photo + name row, details below full width */
+  .person, .person.prof { grid-template-columns: 84px 1fr; gap: 14px; padding: 18px 0; }
+  .person .photo, .person.prof .photo { width: 84px; }
+  .person h3 { font-size: 1.02rem; }
+  .person h3 .ko { display: block; margin: 2px 0 0; }
+  .person .role { font-size: 0.88rem; }
+  .fields { font-size: 0.9rem; }
+  .fields > li { grid-template-columns: 74px 1fr; gap: 8px; }
+  .person.prof .fields { grid-column: 1 / -1; margin-top: 4px; }
+  .person.prof .fields > li:has(.sub) { grid-template-columns: 1fr; gap: 2px; padding-top: 8px; }
+  .fields .sub li { grid-template-columns: 1fr; padding: 2px 0; }
+  .fields .sub li span:first-child { font-size: 0.82rem; }
+  /* publications */
+  .pub-nav { gap: 4px 14px; font-size: 0.85rem; }
+  .year { padding: 22px 0; gap: 10px; }
+  .year > h2 { font-size: 1.3rem; }
+  .year > h2 small { display: inline; margin-left: 8px; }
+  .pub { grid-template-columns: 22px 1fr; gap: 6px; padding-bottom: 16px; }
+  .pub .title { font-size: 0.98rem; line-height: 1.35; }
+  .pub .authors { font-size: 0.88rem; }
+  .pub .venue { font-size: 0.84rem; }
+  .pub .meta { font-size: 0.78rem; }
+}
 :root {
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body: 'Manrope', system-ui, sans-serif;
