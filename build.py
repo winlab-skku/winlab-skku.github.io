@@ -14,8 +14,10 @@ UNIV = "Sungkyunkwan University"
 PROF_NAME = "Kisong Lee"
 SHOW_UNDERGRAD_PUBS = True   # set False to hide publication lists for undergraduate students
 
-PAGES = [("Home", "index.html"), ("Members", "members/index.html"),
-         ("Publications", "publications/index.html"), ("News", "news/index.html")]
+# hrefs without index.html: GitHub Pages serves folder/ as folder/index.html.
+# (When opening the files locally by double-click, use `python3 -m http.server` instead.)
+PAGES = [("Home", ""), ("Members", "members/"),
+         ("Publications", "publications/"), ("News", "news/")]
 
 # ---------------------------------------------------------------- data
 
@@ -104,7 +106,7 @@ def shell(title, body, depth, current):
     css_v = asset_version("assets/style.css")
     nav = "".join(
         f'<li><a href="{up}{href}"{" aria-current=\"page\"" if name == current else ""}>{name}</a></li>'
-        for name, href in PAGES)
+        for name, href in PAGES).replace('href=""', 'href="./"')
     full = f"{LAB} ({LAB_SHORT})" if current == "Home" else f"{title} — {LAB}"
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -119,7 +121,7 @@ def shell(title, body, depth, current):
 <body class="page-{current.lower()}">
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="{up}index.html"><span class="short">{LAB_SHORT}</span><span class="long">{LAB}</span></a>
+    <a class="brand" href="{up or "./"}"><span class="short">{LAB_SHORT}</span><span class="long">{LAB}</span></a>
     <nav><ul class="nav">{nav}</ul></nav>
   </div>
 </header>
@@ -238,7 +240,7 @@ def build_home():
         for d, label, t, _ in NEWS[:8])
     body = f"""    <h1>Wireless Intelligence Lab</h1>
     <p class="lede">Optimization and learning for intelligent wireless networks, from the ground to the sky. We design UAV and satellite communications, wireless-powered networks, and secure resource allocation using both classical optimization and deep learning.</p>
-    <p class="affil">School of Electronic and Electrical Engineering, Sungkyunkwan University<br>Directed by Prof. <a href="members/index.html">Kisong Lee</a></p>
+    <p class="affil">School of Electronic and Electrical Engineering, Sungkyunkwan University<br>Directed by Prof. <a href="members/">Kisong Lee</a></p>
 
     <section class="section">
       <h2>Research areas</h2>
@@ -255,7 +257,7 @@ def build_home():
         <ul class="news-teaser">
 {updates}
         </ul>
-        <p style="margin-top:16px"><a href="news/index.html">All updates</a></p>
+        <p style="margin-top:16px"><a href="news/">All updates</a></p>
       </div>
     </section>
 
