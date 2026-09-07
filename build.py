@@ -62,7 +62,7 @@ UNDERGRAD = [
     ("Donghee Kim", "김동희", "Undergraduate researcher (2024.12 ~)", "ksch0382@gmail.com", "UAV-enabled secure communications"),
     ("Eunki Lee", "이은기", "Undergraduate researcher (2025.07 ~)", "dldmsrl0422@naver.com", "Wireless communications"),
     ("Jaejin Lee", "이재진", "Undergraduate researcher (2025.07 ~)", "youngmun5013@gmail.com", "UAV-enabled data harvesting"),
-    ("Garam Cho", "조가람", "Undergraduate researcher (2025.12 ~)", "garam@naver.com", "Wireless communications"),
+    ("Garam Cho", "조가람", "Undergraduate researcher (2025.12 ~)", "river040118@gmail.com", "Wireless communications"),
 ]
 # (English name, current affiliation)
 ALUMNI = [
