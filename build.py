@@ -52,17 +52,17 @@ PROF = {
 # (English name, Korean name, course, email, research interest)
 # The English name must match how it appears in data/pubs.txt so publications are picked up automatically.
 GRAD = [
-    ("Gitae Park", "박기태", "Graduate student (20XX.03 ~)", "TODO@skku.edu", "UAV communications, non-terrestrial networks, federated learning"),
-    ("Chaeyeon Kim", "김채연", "Graduate student (20XX.03 ~)", "TODO@skku.edu", "UAV placement and beamforming, LEO satellite systems"),
-    ("Gihyeon Jang", "장기현", "Graduate student (20XX.03 ~)", "TODO@skku.edu", "UAV–UGV cooperative delivery"),
-    ("Hyungwoo Lee", "이형우", "Graduate student (20XX.03 ~)", "TODO@skku.edu", "Blockage-aware UAV communications, RSMA"),
+    ("Chaeyeon Kim", "김채연", "Graduate student (2024.03 ~)", "ikuty@skku.edu", "UAV placement and beamforming, LEO satellite systems"),
+    ("Gitae Park", "박기태", "Graduate student (2024.09 ~)", "rlxo7045@skku.edu", "UAV communications, non-terrestrial networks, federated learning"),
+    ("Gihyeon Jang", "장기현", "Graduate student (2025.03 ~)", "lightjang2001@naver.com", "UAV–UGV cooperative delivery"),
+    ("Hyungwoo Lee", "이형우", "Graduate student (2026.03 ~)", "hywo81@gmail.com", "Blockage-aware UAV communications, RSMA"),
 ]
 UNDERGRAD = [
-    ("Kangwoo Cho", "조강우", "Undergraduate researcher (20XX.XX ~)", "TODO@skku.edu", "Anti-jamming communications, UAV swarms"),
-    ("Donghee Kim", "김동희", "Undergraduate researcher (20XX.XX ~)", "TODO@skku.edu", "UAV-enabled secure communications"),
-    ("Eunki Lee", "이은기", "Undergraduate researcher (20XX.XX ~)", "TODO@skku.edu", "Wireless communications"),
-    ("Jaejin Lee", "이재진", "Undergraduate researcher (20XX.XX ~)", "TODO@skku.edu", "UAV-enabled data harvesting"),
-    ("Garam Cho", "조가람", "Undergraduate researcher (20XX.XX ~)", "TODO@skku.edu", "Wireless communications"),
+    ("Kangwoo Cho", "조강우", "Undergraduate researcher (2024.06 ~)", "wlrb1224@naver.com", "Anti-jamming communications, UAV swarms"),
+    ("Donghee Kim", "김동희", "Undergraduate researcher (2024.12 ~)", "ksch0382@gmail.com", "UAV-enabled secure communications"),
+    ("Eunki Lee", "이은기", "Undergraduate researcher (2025.07 ~)", "dldmsrl0422@naver.com", "Wireless communications"),
+    ("Jaejin Lee", "이재진", "Undergraduate researcher (2025.07 ~)", "youngmun5013@gmail.com", "UAV-enabled data harvesting"),
+    ("Garam Cho", "조가람", "Undergraduate researcher (2025.12 ~)", "garam@naver.com", "Wireless communications"),
 ]
 # (English name, current affiliation)
 ALUMNI = [
@@ -152,11 +152,16 @@ def parse_pubs():
     return sections
 
 
-def fmt_authors(a, bold=(PROF_NAME,)):
+def lab_members():
+    return [PROF_NAME] + [m[0] for m in GRAD] + [m[0] for m in UNDERGRAD] + [n for n, _ in ALUMNI]
+
+
+def fmt_authors(a, bold=None):
+    """Bold every lab member (current and alumni); '*' becomes a superscript after the name."""
     a = esc(a)
-    a = a.replace("*" + PROF_NAME, f"{PROF_NAME}<sup>*</sup>")
-    for name in bold:
-        a = re.sub(rf'(?<![\w>]){re.escape(name)}(?![\w<])', f"<b>{name}</b>", a)
+    for name in (bold or lab_members()):
+        a = re.sub(rf'(\*?)(?<![\w>]){re.escape(name)}(?![\w<])',
+                   lambda m: f"<b>{name}</b>" + ("<sup>*</sup>" if m.group(1) else ""), a)
     return a
 
 
@@ -165,7 +170,7 @@ def build_publications():
     published = sum(len(s[1]) for s in secs if s[0] not in ("Under Review", "Early Access"))
     anchors = "".join(f'<a href="#{slug(n)}">{esc(n)}</a>' for n, _ in secs)
     out = ["<h1>Publications</h1>",
-           f'<p class="lede">{published} published journal articles, plus papers in press and under review.<br><sup>*</sup> marks the corresponding author.</p>',
+           f'<p class="lede">{published} published journal articles, plus papers in press and under review.<br>Lab members are shown in bold; <sup>*</sup> marks the corresponding author.</p>',
            f'<nav class="pub-nav">{anchors}</nav>']
     for name, items in secs:
         sub = ""
@@ -207,7 +212,7 @@ def member_pubs_html(name):
             status = re.sub(r',\s*Accepted$', "", rest) + ", accepted"
         else:
             status = rest
-        rows.append(f'<li><span class="t">{esc(title)}</span><span class="a">{fmt_authors(authors, bold=(PROF_NAME, name))}</span><span class="v">{esc(status)}</span></li>')
+        rows.append(f'<li><span class="t">{esc(title)}</span><span class="a">{fmt_authors(authors)}</span><span class="v">{esc(status)}</span></li>')
     return f'<li class="pubs-field"><span>Publications</span><ol class="mini-pubs">{"".join(rows)}</ol></li>'
 
 
@@ -337,7 +342,7 @@ def build_news():
 # ---------------------------------------------------------------- news data (date, label, title, text)
 
 NEWS = [
-    ("2026-09-01", "Sep 1, 2026", "Lab moves to Sungkyunkwan University",
+    ("2026-09", "Sep 2026", "Lab moves to Sungkyunkwan University",
      "Prof. Kisong Lee joins the School of Electronic and Electrical Engineering at Sungkyunkwan University as Professor."),
     ("2026-06", "Jun 2026", "Undergraduate Paper Award, KICS Summer Conference",
      "Encouragement Prize for an undergraduate paper at the 2026 KICS Summer Conference (한국통신학회 하계학술대회 학부우수논문상 장려상)."),

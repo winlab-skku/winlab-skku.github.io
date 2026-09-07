@@ -43,7 +43,7 @@ p { margin: 0 0 1.1em; max-width: var(--measure); text-wrap: pretty; }
 .affil { color: var(--ink-2); font-size: 0.95rem; margin-top: -4px; }
 
 /* Sections: label + content */
-.section { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 44px 0; border-top: 1px solid var(--rule); }
+.section { display: grid; grid-template-columns: 236px 1fr; gap: 24px; padding: 44px 0; border-top: 1px solid var(--rule); }
 .section > h2 { margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--label); }
 .section > div { max-width: var(--measure); }
 
@@ -81,7 +81,7 @@ p { margin: 0 0 1.1em; max-width: var(--measure); text-wrap: pretty; }
 .pub-nav { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.9rem; margin: 0 0 8px; max-width: var(--measure); }
 .pub-nav a { color: var(--ink-2); text-decoration: none; }
 .pub-nav a:hover { color: var(--accent); }
-.year { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 36px 0; border-top: 1px solid var(--rule); }
+.year { display: grid; grid-template-columns: 236px 1fr; gap: 24px; padding: 36px 0; border-top: 1px solid var(--rule); }
 .year > h2 { margin: 0; font-family: var(--font-display); font-size: 1.8rem; font-weight: var(--h1-weight, 500); color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
 .year > h2.label { font-family: var(--font-body); font-size: 1.05rem; font-weight: 600; line-height: 1.25; color: var(--ink); }
 .year > h2 small { display: block; font-size: 0.8rem; color: var(--ink-3); font-weight: 400; margin-top: 6px; line-height: 1.3; font-family: var(--font-body); }
@@ -97,7 +97,7 @@ p { margin: 0 0 1.1em; max-width: var(--measure); text-wrap: pretty; }
 
 /* News */
 .news { list-style: none; margin: 0; padding: 0; }
-.news li { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--rule); }
+.news li { display: grid; grid-template-columns: 236px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--rule); }
 .news time { color: var(--ink-3); font-size: 0.9rem; padding-top: 2px; }
 .news h3 { margin: 0 0 4px; font-size: 1.05rem; font-weight: 600; }
 .news p { margin: 0; color: var(--ink-2); font-size: 0.95rem; max-width: 60ch; }
@@ -176,6 +176,7 @@ h1 { letter-spacing: -0.03em; }
 .page-home h1 { font-size: 3.2rem; }
 .page-home .lede { font-size: 1.25rem; }
 .section > h2 { text-transform: none; letter-spacing: 0; }
+.section > h2 { white-space: nowrap; }
 .section > h2::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 10px; vertical-align: 1px; }
 /* research areas as a 2-column card grid */
 .page-home .section > div:has(.areas) { max-width: none; }
@@ -208,7 +209,7 @@ h1 { letter-spacing: -0.03em; }
 .alumni span { color: var(--ink-2); font-size: 0.92rem; }
 
 /* ---- Per-member publication list ---- */
-.fields > li.pubs-field { grid-template-columns: 90px 1fr; }
+.fields > li.pubs-field { grid-template-columns: 104px 1fr; }
 .mini-pubs { margin: 0; padding: 0 0 0 1.1em; }
 .mini-pubs li { padding: 3px 0; }
 .mini-pubs .t { display: block; font-weight: 500; }
