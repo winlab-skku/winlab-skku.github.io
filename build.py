@@ -5,7 +5,7 @@
 
 Edit the data at the top of this file (members, news) or data/pubs.txt, then rebuild.
 """
-import html, os, re
+import html, os, re, hashlib
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LAB = "Wireless Intelligence Lab"
@@ -91,8 +91,17 @@ def slug(s):
     return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
 
 
+def asset_version(path):
+    """Short hash of a file's contents, appended to its URL so browsers refetch it when it changes."""
+    try:
+        return hashlib.md5(open(os.path.join(ROOT, path), "rb").read()).hexdigest()[:8]
+    except FileNotFoundError:
+        return "0"
+
+
 def shell(title, body, depth, current):
     up = "../" * depth
+    css_v = asset_version("assets/style.css")
     nav = "".join(
         f'<li><a href="{up}{href}"{" aria-current=\"page\"" if name == current else ""}>{name}</a></li>'
         for name, href in PAGES)
@@ -102,9 +111,10 @@ def shell(title, body, depth, current):
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
   <title>{full}</title>
   <meta name="description" content="{LAB} ({LAB_SHORT}), {UNIV}. Optimization and learning for intelligent wireless networks: UAV and satellite communications, wireless-powered networks, and agentic AI communications.">
-  <link rel="stylesheet" href="{up}assets/style.css">
+  <link rel="stylesheet" href="{up}assets/style.css?v={css_v}">
 </head>
 <body class="page-{current.lower()}">
 <header class="top">
@@ -369,6 +379,35 @@ NEWS = [
 ]
 
 
+def optimize_images():
+    """Downscale oversized images so browsers don't have to (large originals look aliased on 1x displays).
+    Member photos → 480x640 (3:4, center crop). Research images → max 800px. Files are rewritten in place."""
+    try:
+        from PIL import Image, ImageOps
+    except ImportError:
+        print("Pillow not installed; skipping image optimization (pip install pillow)")
+        return
+    photos = os.path.join(ROOT, "assets/photos")
+    for f in sorted(os.listdir(photos)) if os.path.isdir(photos) else []:
+        p = os.path.join(photos, f)
+        if not f.lower().endswith((".jpg", ".jpeg", ".png")):
+            continue
+        im = ImageOps.exif_transpose(Image.open(p)).convert("RGB")
+        if im.width <= 480 and im.height <= 640 and abs(im.width / im.height - 0.75) < 0.02:
+            continue
+        im = ImageOps.fit(im, (480, 640), Image.LANCZOS, centering=(0.5, 0.4))
+        im.save(p, "JPEG", quality=86, optimize=True)
+        print("resized", f)
+    research = os.path.join(ROOT, "assets/research")
+    for f in sorted(os.listdir(research)) if os.path.isdir(research) else []:
+        p = os.path.join(research, f)
+        im = Image.open(p)
+        if max(im.size) > 800:
+            im.convert("RGB").resize((800, int(800 * im.height / im.width)), Image.LANCZOS).save(p, "JPEG", quality=86, optimize=True)
+            print("resized", f)
+
+
 if __name__ == "__main__":
+    optimize_images()
     build_home(); build_members(); build_publications(); build_news()
     print("built")
