@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WIn Lab — Admin</title>
+<link rel="icon" href="../assets/favicon.svg">
+<style>
+  :root { --ink:#1c1f21; --ink2:#545b60; --ink3:#8d949a; --rule:#e5e8e8; --panel:#f2f4f4; --accent:#0f766e; --accent2:#5eead4; --danger:#b42318; }
+  * { box-sizing:border-box; }
+  body { margin:0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:#fff; }
+  header { background:var(--ink); color:#fff; padding:0 24px; height:56px; display:flex; align-items:center; gap:24px; position:sticky; top:0; z-index:10; }
+  header b { color:var(--accent2); font-size:17px; }
+  header span { opacity:.6; font-size:13px; }
+  header .spacer { flex:1; }
+  header a { color:#fff; opacity:.8; text-decoration:none; font-size:14px; }
+  header a:hover { opacity:1; }
+  .layout { display:grid; grid-template-columns:200px 1fr; min-height:calc(100vh - 56px); }
+  nav { border-right:1px solid var(--rule); padding:16px 0; background:#fafbfb; }
+  nav button { display:block; width:100%; text-align:left; padding:10px 22px; border:0; background:none; font:inherit; color:var(--ink2); cursor:pointer; }
+  nav button.on { color:var(--accent); font-weight:600; background:#fff; border-right:3px solid var(--accent); }
+  main { padding:28px 36px 120px; max-width:1000px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .hint { color:var(--ink3); font-size:13px; margin:0 0 20px; }
+  h2 { font-size:15px; margin:28px 0 10px; color:var(--accent); }
+  .card { border:1px solid var(--rule); border-radius:8px; padding:14px 16px; margin-bottom:10px; background:#fff; }
+  .card.prof { background:var(--panel); }
+  .row { display:grid; grid-template-columns:130px 1fr; gap:8px 12px; align-items:start; margin:6px 0; }
+  .row label { color:var(--ink3); font-size:13px; padding-top:7px; }
+  input[type=text], textarea, select { width:100%; padding:6px 9px; border:1px solid #cfd5d5; border-radius:5px; font:inherit; font-size:14px; background:#fff; }
+  textarea { min-height:60px; resize:vertical; }
+  input:focus, textarea:focus, select:focus { outline:2px solid var(--accent2); border-color:var(--accent); }
+  .tools { display:flex; gap:6px; justify-content:flex-end; margin-top:8px; }
+  .tools button, .btn { padding:5px 11px; border:1px solid #cfd5d5; border-radius:5px; background:#fff; font:inherit; font-size:13px; cursor:pointer; color:var(--ink2); }
+  .tools button:hover, .btn:hover { border-color:var(--ink2); color:var(--ink); }
+  .tools .del { color:var(--danger); }
+  .btn.primary { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+  .btn.primary:hover { background:#0b5f58; color:#fff; }
+  .btn.add { margin:4px 0 12px; }
+  .photo { display:flex; gap:12px; align-items:center; }
+  .photo img { width:60px; height:80px; object-fit:cover; background:var(--panel); border-radius:4px; }
+  .photo .none { width:60px; height:80px; background:var(--panel); border-radius:4px; display:grid; place-items:center; color:var(--ink3); font-size:11px; }
+  .sub { border-left:2px solid var(--rule); padding-left:12px; margin:4px 0; }
+  .sub .row { grid-template-columns:150px 1fr auto; }
+  .pubsec { margin-bottom:26px; }
+  .pubsec h2 { display:flex; align-items:center; gap:10px; }
+  .pubsec h2 small { color:var(--ink3); font-weight:400; }
+  .pub .row { grid-template-columns:70px 1fr; }
+  .bar { position:fixed; left:200px; right:0; bottom:0; background:#fff; border-top:1px solid var(--rule); padding:12px 36px; display:flex; gap:10px; align-items:center; }
+  .bar .status { color:var(--ink3); font-size:13px; flex:1; }
+  .bar .status.err { color:var(--danger); }
+  .bar .status.ok { color:var(--accent); }
+  .files { background:var(--panel); border-radius:8px; padding:14px 18px; font-family:ui-monospace, Menlo, Consolas, monospace; font-size:13px; }
+  .files li { padding:2px 0; }
+  .dirty header b::after { content:" •"; color:#fbbf24; }
+  @media (max-width:800px) { .layout { grid-template-columns:1fr; } nav { display:flex; overflow-x:auto; } nav button.on { border-right:0; border-bottom:3px solid var(--accent); } .bar { left:0; } main { padding:20px; } .row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <b>WIn Lab</b><span>Admin</span>
+  <span id="root" style="opacity:.9;font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace;margin-left:12px;padding:3px 8px;border:1px solid rgba(255,255,255,.25);border-radius:4px"></span>
+  <div class="spacer"></div>
+  <a href="/" target="_blank">사이트 미리보기 ↗</a>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+<div class="bar">
+  <div class="status" id="status">불러오는 중…</div>
+  <button class="btn" id="reload">되돌리기</button>
+  <button class="btn primary" id="save">저장 + 빌드</button>
+</div>
+
+<script>
+let D = null, dirty = false, tab = 'members';
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const TABS = [['members','Members'],['pubs','Publications'],['research','Research areas'],['news','News'],['site','Site text & settings']];
+
+function setStatus(msg, cls='') { const s = $('#status'); s.textContent = msg; s.className = 'status ' + cls; }
+function markDirty() { dirty = true; document.body.classList.add('dirty'); setStatus('저장되지 않은 변경사항이 있습니다.'); }
+window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+async function api(path, body) {
+  const r = await fetch(path, body ? {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)} : {});
+  const j = await r.json();
+  if (!j.ok && body) throw new Error(j.error || 'error');
+  return j;
+}
+async function load() {
+  D = await api('/api/data'); dirty = false; document.body.classList.remove('dirty');
+  $('#root').textContent = '편집 중: ' + D.root; document.title = 'WIn Lab Admin — ' + D.root.split(/[\\/]/).slice(-1)[0];
+  render(); setStatus('불러왔습니다.');
+}
+
+// ---------- generic editors
+function field(obj, key, label, type='text', extra='') {
+  const v = esc(obj[key]);
+  const ctl = type === 'textarea' ? `<textarea data-k="${key}">${v}</textarea>` : `<input type="text" data-k="${key}" value="${v}" ${extra}>`;
+  return `<div class="row"><label>${label}</label>${ctl}</div>`;
+}
+function bindFields(el, obj) {
+  el.querySelectorAll('[data-k]').forEach(i => i.addEventListener('input', () => { obj[i.dataset.k] = i.value; markDirty(); }));
+}
+function listTools(arr, i) {
+  return `<div class="tools"><button data-act="up" ${i===0?'disabled':''}>↑</button><button data-act="down" ${i===arr.length-1?'disabled':''}>↓</button><button data-act="del" class="del">삭제</button></div>`;
+}
+function bindTools(el, arr, i, rerender) {
+  el.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => {
+    const a = b.dataset.act;
+    if (a === 'del') { if (!confirm('삭제할까요?')) return; arr.splice(i, 1); }
+    if (a === 'up') [arr[i-1], arr[i]] = [arr[i], arr[i-1]];
+    if (a === 'down') [arr[i+1], arr[i]] = [arr[i], arr[i+1]];
+    markDirty(); rerender();
+  }));
+}
+function listEditor(container, arr, fields, blank, opts={}) {
+  const draw = () => {
+    container.innerHTML = '';
+    arr.forEach((it, i) => {
+      const card = document.createElement('div'); card.className = 'card';
+      card.innerHTML = (opts.extra ? opts.extra(it) : '') + fields.map(f => field(it, ...f)).join('') + listTools(arr, i);
+      bindFields(card, it); bindTools(card, arr, i, draw);
+      if (opts.after) opts.after(card, it, draw);
+      container.appendChild(card);
+    });
+    const add = document.createElement('button'); add.className = 'btn add'; add.textContent = '+ 추가';
+    add.onclick = () => { arr.push(JSON.parse(JSON.stringify(blank))); markDirty(); draw(); container.lastElementChild.previousElementSibling.querySelector('input,textarea')?.focus(); };
+    container.appendChild(add);
+  };
+  draw();
+}
+
+// ---------- photos
+function photoBlock(name) {
+  const file = slug(name) + '.jpg';
+  const has = D.photos.includes(file);
+  return `<div class="row"><label>사진</label><div class="photo">
+    ${has ? `<img src="/assets/photos/${file}?${Date.now()}">` : `<div class="none">없음</div>`}
+    <div><code style="font-size:12px;color:var(--ink3)">assets/photos/${file}</code><br>
+    <input type="file" accept="image/*" data-photo="${file}" style="font-size:12px;margin-top:4px">
+    ${has ? `<button class="btn" data-delphoto="${file}" style="margin-top:4px">사진 삭제</button>` : ''}</div>
+  </div></div>`;
+}
+function bindPhoto(card, rerender) {
+  card.querySelectorAll('[data-photo]').forEach(inp => inp.addEventListener('change', async () => {
+    const f = inp.files[0]; if (!f) return;
+    const data = await new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(f); });
+    setStatus('사진 업로드 중…');
+    try { await api('/api/upload', {kind:'photo', name: inp.dataset.photo, data}); D.photos.push(inp.dataset.photo); setStatus('사진을 넣었습니다. 저장+빌드 시 480×640으로 자동 조정됩니다.', 'ok'); dirty = true; document.body.classList.add('dirty'); rerender(); }
+    catch (e) { setStatus('업로드 실패: ' + e.message, 'err'); }
+  }));
+  card.querySelectorAll('[data-delphoto]').forEach(b => b.addEventListener('click', async () => {
+    if (!confirm('사진을 삭제할까요?')) return;
+    await api('/api/delete-photo', {name: b.dataset.delphoto}); D.photos = D.photos.filter(x => x !== b.dataset.delphoto); rerender();
+  }));
+}
+
+// ---------- tabs
+const MEMBER_FIELDS = [['en','영문 이름','text','placeholder="Gitae Park (논문 저자 표기와 동일하게)"'],['ko','한글 이름'],['course','과정·시작','text','placeholder="Graduate student (2024.03 ~)"'],['email','이메일'],['interest','관심분야']];
+const MEMBER_BLANK = {en:'', ko:'', course:'Graduate student (20XX.03 ~)', email:'', interest:''};
+
+function renderMembers(m) {
+  const S = D.site;
+  m.innerHTML = `<h1>Members</h1><p class="hint">영문 이름은 Publications의 저자 표기와 철자가 같아야 논문 목록이 자동으로 붙고 굵게 표시됩니다.</p>
+    <h2>Professor</h2><div id="prof"></div>
+    <h2>Graduate students</h2><div id="grad"></div>
+    <h2>Undergraduate students</h2><div id="ug"></div>
+    <h2>Alumni</h2><p class="hint">사진 없이 이름과 현 소속만 표시됩니다. 여기 이름도 논문 목록에서 굵게 처리됩니다.</p><div id="alumni"></div>`;
+  // professor
+  const P = S.professor, pc = $('#prof');
+  const drawProf = () => {
+    pc.innerHTML = `<div class="card prof">${photoBlock(P.en)}${[['en','영문 이름'],['ko','한글 이름'],['role','직함'],['email','이메일'],['office','Office'],['interest','관심분야','textarea']].map(f=>field(P,...f)).join('')}
+      <div class="row"><label>Education</label><div class="sub" id="edu"></div></div>
+      <div class="row"><label>Experience</label><div class="sub" id="exp"></div></div></div>`;
+    bindFields(pc, P); bindPhoto(pc, drawProf);
+    listEditor($('#edu'), P.education, [['date','기간'],['text','내용']], {date:'', text:''});
+    listEditor($('#exp'), P.experience, [['date','기간'],['text','내용']], {date:'', text:''});
+  };
+  drawProf();
+  const memberOpts = { extra: it => photoBlock(it.en || 'new'), after: (card, it, draw) => { bindPhoto(card, draw); card.querySelector('[data-k=en]').addEventListener('change', draw); } };
+  listEditor($('#grad'), S.graduate, MEMBER_FIELDS, MEMBER_BLANK, memberOpts);
+  listEditor($('#ug'), S.undergraduate, MEMBER_FIELDS, {...MEMBER_BLANK, course:'Undergraduate researcher (20XX.XX ~)'}, memberOpts);
+  listEditor($('#alumni'), S.alumni, [['name','영문 이름'],['affiliation','현 소속']], {name:'', affiliation:''});
+}
+
+function renderPubs(m) {
+  const Pb = D.pubs;
+  m.innerHTML = `<h1>Publications</h1><p class="hint">저자에서 교신저자는 이름 앞에 <code>*</code>를 붙이세요 (예: <code>Gitae Park and *Kisong Lee</code>). Under Review / Early Access 항목의 저널 칸에는 상태(Under Major Revision 등)나 "저널명, Accepted"를 적습니다.</p>
+    <div class="tools" style="justify-content:flex-start;margin-bottom:16px"><button id="addSec">+ 섹션(연도) 추가</button></div><div id="secs"></div>`;
+  const draw = () => {
+    const box = $('#secs'); box.innerHTML = '';
+    Pb.sections.forEach((sec, si) => {
+      const items = Pb.items.filter(x => x.section === sec);
+      const wrap = document.createElement('div'); wrap.className = 'pubsec';
+      wrap.innerHTML = `<h2>${esc(sec)} <small>${items.length}편</small><span class="tools" style="margin:0"><button data-s="up" ${si===0?'disabled':''}>↑</button><button data-s="down" ${si===Pb.sections.length-1?'disabled':''}>↓</button><button data-s="rename">이름 변경</button><button data-s="del" class="del" ${items.length?'disabled title="비어 있을 때만 삭제 가능"':''}>삭제</button></span></h2><div class="list"></div>`;
+      wrap.querySelectorAll('[data-s]').forEach(b => b.onclick = () => {
+        const a = b.dataset.s;
+        if (a === 'up') [Pb.sections[si-1], Pb.sections[si]] = [Pb.sections[si], Pb.sections[si-1]];
+        if (a === 'down') [Pb.sections[si+1], Pb.sections[si]] = [Pb.sections[si], Pb.sections[si+1]];
+        if (a === 'rename') { const n = prompt('섹션 이름', sec); if (!n) return; Pb.sections[si] = n; Pb.items.forEach(x => { if (x.section === sec) x.section = n; }); }
+        if (a === 'del') Pb.sections.splice(si, 1);
+        markDirty(); draw();
+      });
+      const list = wrap.querySelector('.list');
+      items.forEach((it, i) => {
+        const card = document.createElement('div'); card.className = 'card pub';
+        card.innerHTML = field(it,'title','제목') + field(it,'authors','저자') + field(it,'venue','저널/상태') + field(it,'meta','IF 등','text','placeholder="IF2025: 8.4, Top 9.6%"') +
+          `<div class="row"><label>섹션</label><select data-sec>${Pb.sections.map(s=>`<option ${s===sec?'selected':''}>${esc(s)}</option>`).join('')}</select></div>` + listTools(items, i);
+        bindFields(card, it);
+        card.querySelector('[data-sec]').onchange = e => { it.section = e.target.value; markDirty(); draw(); };
+        card.querySelectorAll('[data-act]').forEach(b => b.onclick = () => {
+          const gi = Pb.items.indexOf(it), a = b.dataset.act;
+          if (a === 'del') { if (!confirm('삭제할까요?')) return; Pb.items.splice(gi, 1); }
+          if (a === 'up') { const pi = Pb.items.indexOf(items[i-1]); [Pb.items[pi], Pb.items[gi]] = [Pb.items[gi], Pb.items[pi]]; }
+          if (a === 'down') { const ni = Pb.items.indexOf(items[i+1]); [Pb.items[ni], Pb.items[gi]] = [Pb.items[gi], Pb.items[ni]]; }
+          markDirty(); draw();
+        });
+        list.appendChild(card);
+      });
+      const add = document.createElement('button'); add.className = 'btn add'; add.textContent = '+ 이 섹션에 논문 추가';
+      add.onclick = () => { const last = items.length ? Pb.items.indexOf(items[items.length-1]) + 1 : Pb.items.length; Pb.items.splice(last, 0, {section:sec, title:'', authors:'', venue:'', meta:''}); markDirty(); draw(); };
+      list.appendChild(add);
+      box.appendChild(wrap);
+    });
+  };
+  draw();
+  $('#addSec').onclick = () => { const n = prompt('섹션 이름 (예: 2027)'); if (!n) return; Pb.sections.splice(2, 0, n); markDirty(); draw(); };
+}
+
+function renderResearch(m) {
+  m.innerHTML = `<h1>Research areas</h1><p class="hint">홈에 카드로 표시됩니다. 그림은 정사각형 권장, 800px 이상이면 빌드 시 자동 축소됩니다.</p><div id="res"></div>`;
+  listEditor($('#res'), D.site.research, [['title','제목'],['text','설명','textarea']], {title:'', image:'', text:''}, {
+    extra: it => `<div class="row"><label>그림</label><div class="photo">${it.image && D.research_images.includes(it.image) ? `<img src="/assets/research/${it.image}?${Date.now()}" style="height:60px;width:60px">` : `<div class="none" style="height:60px">없음</div>`}
+      <div><select data-img><option value="">(선택)</option>${D.research_images.map(f=>`<option ${f===it.image?'selected':''}>${esc(f)}</option>`).join('')}</select>
+      <input type="file" accept="image/*" data-rimg style="font-size:12px;margin-top:4px"></div></div></div>`,
+    after: (card, it, draw) => {
+      card.querySelector('[data-img]').onchange = e => { it.image = e.target.value; markDirty(); draw(); };
+      card.querySelector('[data-rimg]').onchange = async e => {
+        const f = e.target.files[0]; if (!f) return;
+        const data = await new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(f); });
+        const name = slug(f.name.replace(/\.[^.]+$/, '')) + '.jpg';
+        try { await api('/api/upload', {kind:'research', name, data}); if (!D.research_images.includes(name)) D.research_images.push(name); it.image = name; markDirty(); draw(); }
+        catch (err) { setStatus('업로드 실패: ' + err.message, 'err'); }
+      };
+    }
+  });
+}
+
+function renderNews(m) {
+  m.innerHTML = `<h1>News</h1><p class="hint">위에 있는 항목이 최신입니다. 홈의 Updates에는 상위 ${D.site.settings.home_updates}개가 제목만 표시됩니다.</p><div id="news"></div>`;
+  listEditor($('#news'), D.site.news, [['label','표시 날짜','text','placeholder="Sep 2026"'],['date','정렬용 날짜','text','placeholder="2026-09"'],['title','제목'],['text','내용','textarea']], {label:'', date:'', title:'', text:''});
+}
+
+function renderSite(m) {
+  const S = D.site;
+  m.innerHTML = `<h1>Site text & settings</h1><div class="card" id="lab"></div><h2>Settings</h2><div class="card" id="set"></div>`;
+  $('#lab').innerHTML = [['name','랩 이름'],['short','약칭'],['university','대학'],['tagline','홈 소개문','textarea'],['affiliation','소속 (홈)'],['address','주소 (푸터)'],['email','대표 이메일'],['recruitment','Recruitment 문단','textarea']].map(f=>field(S.lab,...f)).join('');
+  bindFields($('#lab'), S.lab);
+  const st = S.settings;
+  $('#set').innerHTML = `<div class="row"><label>학부생 논문 표시</label><select data-k="show_undergrad_pubs"><option value="true" ${st.show_undergrad_pubs?'selected':''}>표시</option><option value="false" ${!st.show_undergrad_pubs?'selected':''}>숨김</option></select></div>
+    <div class="row"><label>멤버당 논문 표시 수</label><input type="text" data-k="member_pubs_visible" value="${st.member_pubs_visible}"></div>
+    <div class="row"><label>홈 Updates 개수</label><input type="text" data-k="home_updates" value="${st.home_updates}"></div>`;
+  $('#set').querySelectorAll('[data-k]').forEach(i => i.addEventListener('change', () => {
+    const k = i.dataset.k; st[k] = k === 'show_undergrad_pubs' ? i.value === 'true' : parseInt(i.value, 10) || 0; markDirty();
+  }));
+}
+
+function render() {
+  $('#nav').innerHTML = TABS.map(([k, l]) => `<button class="${k===tab?'on':''}" data-tab="${k}">${l}</button>`).join('');
+  $('#nav').querySelectorAll('button').forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); window.scrollTo(0,0); });
+  const m = $('#main');
+  ({members: renderMembers, pubs: renderPubs, research: renderResearch, news: renderNews, site: renderSite})[tab](m);
+}
+
+// ---------- save / build
+$('#save').onclick = async () => {
+  setStatus('저장하고 빌드하는 중…');
+  try {
+    const r = await api('/api/save', {site: D.site, pubs: D.pubs, build: true});
+    dirty = false; document.body.classList.remove('dirty');
+    const files = [...new Set(r.written)];
+    setStatus('저장 + 빌드 완료. GitHub에 올릴 파일: ' + files.join(', '), 'ok');
+    const box = document.createElement('div'); box.className = 'card';
+    box.innerHTML = `<b>빌드 완료 — 바뀐 파일 (docs/ 기준). 이 작업 폴더 전체를 GitHub에 올리세요</b><ul class="files" style="margin:10px 0 0">${files.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+      <p class="hint" style="margin:10px 0 0">이 폴더 전체를 GitHub에 커밋/업로드하면 됩니다 (docs/ 안이 사이트로 게시됩니다). <a href="/" target="_blank">미리보기 ↗</a></p>`;
+    $('#main').prepend(box); window.scrollTo(0,0);
+    D.photos = (await api('/api/data')).photos;
+  } catch (e) { setStatus('실패: ' + e.message, 'err'); }
+};
+$('#reload').onclick = () => { if (!dirty || confirm('저장하지 않은 변경사항을 버릴까요?')) load(); };
+document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); $('#save').click(); } });
+load();
+</script>
+</body>
+</html>

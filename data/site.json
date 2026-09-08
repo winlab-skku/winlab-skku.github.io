@@ -1,0 +1,234 @@
+{
+  "lab": {
+    "name": "Wireless Intelligence Lab",
+    "short": "WIn Lab",
+    "university": "Sungkyunkwan University",
+    "tagline": "Intelligence for wireless networks from the ground to space. We explore next-generation wireless systems through aerial and space networking, online optimization and control, and agentic AI for autonomous network operation.",
+    "affiliation": "School of Electronic and Electrical Engineering, Sungkyunkwan University",
+    "address": "School of Electronic and Electrical Engineering · Suwon 16419",
+    "email": "kisonglee@skku.edu",
+    "recruitment": "We are seeking motivated graduate students and undergraduate researchers interested in next-generation wireless systems, optimization and control, and autonomous network intelligence. If you are interested in joining our group, please contact Prof. Lee at kisonglee@skku.edu with a brief introduction, research interests, and CV.  "
+  },
+  "settings": {
+    "show_undergrad_pubs": true,
+    "member_pubs_visible": 2,
+    "home_updates": 8
+  },
+  "professor": {
+    "en": "Kisong Lee",
+    "ko": "이기송",
+    "role": "Professor, School of Electronic and Electrical Engineering",
+    "email": "kisonglee@skku.edu",
+    "office": "Office 21233 / Lab 23209",
+    "interest": "Online/offline optimization, energy ICT, information security, aerial and satellite communications, agentic AI communications",
+    "education": [
+      {
+        "date": "Aug. 2013",
+        "text": "Ph.D. in Electrical Engineering, KAIST (Advisor: Prof. Dong-Ho Cho)"
+      },
+      {
+        "date": "Aug. 2009",
+        "text": "M.S. in Electrical Engineering, KAIST"
+      },
+      {
+        "date": "Aug. 2007",
+        "text": "B.S. in Electrical Engineering, KAIST"
+      }
+    ],
+    "experience": [
+      {
+        "date": "2024.07 –",
+        "text": "IEEE Senior Member"
+      },
+      {
+        "date": "2026.09 –",
+        "text": "Professor, Sungkyunkwan University"
+      },
+      {
+        "date": "2020.03 – 2026.08",
+        "text": "Professor / Associate Professor, Dongguk University"
+      },
+      {
+        "date": "2017.09 – 2020.02",
+        "text": "Associate Professor / Assistant Professor, Chungbuk National University"
+      },
+      {
+        "date": "2015.03 – 2017.08",
+        "text": "Assistant Professor, Kunsan National University"
+      },
+      {
+        "date": "2013.09 – 2015.02",
+        "text": "Researcher, ETRI"
+      }
+    ]
+  },
+  "graduate": [
+    {
+      "en": "Chaeyeon Kim",
+      "ko": "김채연",
+      "course": "Integrated M.S./Ph.D. Course (2024.03 ~)",
+      "email": "ikuty@skku.edu",
+      "interest": "UAV placement and beamforming, LEO satellite systems"
+    },
+    {
+      "en": "Gitae Park",
+      "ko": "박기태",
+      "course": "Integrated M.S./Ph.D. Course (2024.09 ~)",
+      "email": "rlxo7045@skku.edu",
+      "interest": "UAV communications, non-terrestrial networks, federated learning"
+    },
+    {
+      "en": "Gihyeon Jang",
+      "ko": "장기현",
+      "course": "M.S. Course (2025.03 ~)",
+      "email": "lightjang2001@naver.com",
+      "interest": "UAV–UGV cooperative delivery"
+    },
+    {
+      "en": "Hyungwoo Lee",
+      "ko": "이형우",
+      "course": "M.S. Course (2026.03 ~)",
+      "email": "hywo81@gmail.com",
+      "interest": "Blockage-aware UAV communications, RSMA"
+    }
+  ],
+  "undergraduate": [
+    {
+      "en": "Kangwoo Cho",
+      "ko": "조강우",
+      "course": "Undergraduate researcher (2024.06 ~)",
+      "email": "wlrb1224@naver.com",
+      "interest": "Anti-jamming communications, UAV swarms"
+    },
+    {
+      "en": "Eunki Lee",
+      "ko": "이은기",
+      "course": "Undergraduate researcher (2025.07 ~)",
+      "email": "dldmsrl0422@naver.com",
+      "interest": "Wireless communications"
+    },
+    {
+      "en": "Jaejin Lee",
+      "ko": "이재진",
+      "course": "Undergraduate researcher (2025.07 ~)",
+      "email": "youngmun5013@gmail.com",
+      "interest": "UAV-enabled data harvesting"
+    },
+    {
+      "en": "Garam Cho",
+      "ko": "조가람",
+      "course": "Undergraduate researcher (2025.12 ~)",
+      "email": "river040118@gmail.com",
+      "interest": "Wireless communications"
+    }
+  ],
+  "alumni": [
+    {
+      "name": "Junseob Lee",
+      "affiliation": "Hanwha Systems"
+    },
+    {
+      "name": "Seungeun Lee",
+      "affiliation": "Hanwha Ocean"
+    },
+    {
+      "name": "Kanghyun Heo",
+      "affiliation": "ETRI"
+    },
+    {
+      "name": "Soobin Yoon",
+      "affiliation": "University of Minnesota"
+    }
+  ],
+  "research": [
+    {
+      "title": "Aerial & Space Networks",
+      "image": "aerial-space-networks.jpg",
+      "text": "We study the design and optimization of aerial and space wireless networks incorporating UAVs, LEO satellites, and terrestrial systems. Our research includes UAV trajectory and deployment optimization, mobility-aware communications, satellite beam placement, and space-air-ground integrated networking."
+    },
+    {
+      "title": "Online Wireless Optimization",
+      "image": "online-wireless-optimization.jpg",
+      "text": "We develop online optimization frameworks for wireless networks under time-varying traffic, channel, mobility, and environmental conditions. Our research focuses on Lyapunov optimization, model predictive control, real-time environment sensing and prediction, and adaptive resource management."
+    },
+    {
+      "title": "Agentic AI Communications",
+      "image": "agentic-ai-communications.jpg",
+      "text": "We study agentic AI frameworks for autonomous wireless systems, where AI agents perceive the environment, reason about user and system objectives, and plan communication strategies. Our research focuses on adaptive decision-making, network control, and closed-loop learning from real-time feedback."
+    }
+  ],
+  "news": [
+    {
+      "date": "2026-09",
+      "label": "Sep 2026",
+      "title": "Lab moves to Sungkyunkwan University",
+      "text": "Prof. Kisong Lee joins the School of Electronic and Electrical Engineering at Sungkyunkwan University as Professor."
+    },
+    {
+      "date": "2026-06",
+      "label": "Jun 2026",
+      "title": "Undergraduate Paper Award, KICS Summer Conference",
+      "text": "Encouragement Prize for an undergraduate paper at the 2026 KICS Summer Conference (한국통신학회 하계학술대회 학부우수논문상 장려상)."
+    },
+    {
+      "date": "2026-02",
+      "label": "Feb 2026",
+      "title": "Haedong Best Paper Award, KICS Winter Conference",
+      "text": "Excellence Prize at the 2026 KICS Winter Conference (해동우수논문상 우수상)."
+    },
+    {
+      "date": "2025-11",
+      "label": "Nov 2025",
+      "title": "Best Paper Award, KICS Summer Conference",
+      "text": "Best paper award at the 2025 KICS Summer Conference (한국통신학회 하계학술대회 우수논문상)."
+    },
+    {
+      "date": "2025-01",
+      "label": "Jan 2025",
+      "title": "Best Paper Award at IEEE ICOIN 2025",
+      "text": "Awarded by the IEEE Computer Society at the International Conference on Information Networking."
+    },
+    {
+      "date": "2024-12",
+      "label": "Dec 2024",
+      "title": "Haedong Young Engineer Award",
+      "text": "Prof. Lee receives the Haedong Young Engineer Award (Academic) from KICS and the Haedong Foundation (해동젊은공학인상 학술상)."
+    },
+    {
+      "date": "2024-07",
+      "label": "Jul 2024",
+      "title": "IEEE Senior Member",
+      "text": "Prof. Lee is elevated to IEEE Senior Member."
+    },
+    {
+      "date": "2023-06",
+      "label": "Jun 2023",
+      "title": "Haedong Best Paper Award, KICS Summer Conference",
+      "text": "Excellence Prize at the 2023 KICS Summer Conference (해동우수논문상 우수상)."
+    },
+    {
+      "date": "2020-07",
+      "label": "Jul 2020",
+      "title": "30th Excellent Science and Technology Paper Award",
+      "text": "Awarded by the Korean Federation of Science and Technology Societies (제30회 과학기술우수논문상, 한국과학기술단체총연합회)."
+    },
+    {
+      "date": "2019-11",
+      "label": "Nov 2019",
+      "title": "Best Paper Award, KICS Summer Conference",
+      "text": "Best paper award at the 2019 KICS Summer Conference."
+    },
+    {
+      "date": "2018-11",
+      "label": "Nov 2018",
+      "title": "Two KICS awards",
+      "text": "Best Paper Award for the KICS domestic journal and Best Paper Award at the 2018 KICS Summer Conference."
+    },
+    {
+      "date": "2013-04",
+      "label": "Apr 2013",
+      "title": "Kim Choong-Ki Award, KAIST",
+      "text": "Research Excellence Award, KAIST."
+    }
+  ]
+}

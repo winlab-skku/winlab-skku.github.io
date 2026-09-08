@@ -1,0 +1,740 @@
+{
+  "sections": [
+    "Under Review",
+    "Early Access",
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016 and Before"
+  ],
+  "items": [
+    {
+      "section": "Under Review",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Adaptive Deep Learning Framework for Robust UAV Communications in Stochastic and Time-Varying Environments",
+      "venue": "Under Major Revision",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Intelligent 3D Trajectory Planning and Resource Allocation for Heterogeneous Multi-UAV Communications Using Deep Learning",
+      "venue": "Under Major Revision",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Gitae Park, Kanghyun Heo, and *Kisong Lee",
+      "title": "Blockage-Aware UAV-Assisted Wireless Data Harvesting With Building Avoidance",
+      "venue": "Under Major Revision",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Hyungwoo Lee, Woongsup Lee, and *Kisong Lee",
+      "title": "Blockage-Aware Hierarchical RSMA for UAV Communications: Joint Trajectory and Resource Optimization",
+      "venue": "Under Major Revision",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Hyungwoo Lee, Kanghyun Heo, and *Kisong Lee",
+      "title": "Blockage-Aware Wireless-Powered Two-Way Communications for UAV-Aided Communications",
+      "venue": "Under Minor Revision",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Chaeyeon Kim and *Kisong Lee",
+      "title": "Blockage-Aware Joint Optimization of Mobile Access Point Placement and Resource Allocation for Interference Management in Heterogeneous Networks",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Kanghyun Heo, *Kisong Lee, and Inkyu Lee",
+      "title": "Toward Reliable Semantic Communication: A Quantitative Metric of Meaning and Adaptive Transmission Framework",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Gitae Park and *Kisong Lee",
+      "title": "Beyond Average-Channel-Based Rate Approximations: UAV Trajectory and Scheduling Optimization With Expected Rate Consideration",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "On-Device Lightweight Deep Learning for Resource Allocation in Constrained IoT Systems",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Donghee Kim, Gitae Park, and *Kisong Lee",
+      "title": "Joint Trajectory and Resource Optimization for Blockage-Aware UAV-Enabled Secure Communications",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Gitae Park, *Kisong Lee, and Jun-Pyo Hong",
+      "title": "Uncertainty- and Channel-Aware Scheduling for Bayesian Federated Learning in Wireless Edge Networks",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Chaeyeon Kim and *Kisong Lee",
+      "title": "Rethinking Joint UAV Placement and Beamforming: A Correlation-Aware Geometric Approach",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Jaejin Lee, Chaeyeon Kim, and *Kisong Lee",
+      "title": "Propulsion Energy Minimization for Blockage-Aware UAV-Enabled Data Harvesting",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Kangwoo Cho and *Kisong Lee",
+      "title": "Proactive Eavesdropping With Building-Induced Concealment in Urban UAV Networks",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Early Access",
+      "authors": "Jun-Pyo Hong, Hyowoon Seo, and *Kisong Lee",
+      "title": "Distribution-Level AirComp for Wireless Federated Learning under Data Scarcity and Heterogeneity",
+      "venue": "IEEE Transactions on Wireless Communications, Accepted",
+      "meta": "IF2025: 10.3, Top 3.5%"
+    },
+    {
+      "section": "Early Access",
+      "authors": "Gitae Park, Woongsup Lee, and *Kisong Lee",
+      "title": "Joint Path Planning and Cooperative Strategy Optimization for Multi-UAV Heavy-Payload Pickup-and-Delivery",
+      "venue": "IEEE Transactions on Vehicular Technology, Accepted",
+      "meta": "IF2025: 7.5, Top 11%"
+    },
+    {
+      "section": "Early Access",
+      "authors": "Gitae Park, Kanghyun Heo, and *Kisong Lee",
+      "title": "Joint Optimization of Beam Position and Communication Resources for Integrated Terrestrial and Non-Terrestrial Networks",
+      "venue": "IEEE Transactions on Vehicular Technology, Accepted",
+      "meta": "IF2025: 7.5, Top 11%"
+    },
+    {
+      "section": "Early Access",
+      "authors": "Chaeyeon Kim, Hyun-Ho Choi, and *Kisong Lee",
+      "title": "Joint Beam Placement and Power Optimization for Broadcast and Multicast Services in Multi-Beam LEO Satellite Systems",
+      "venue": "IEEE Transactions on Vehicular Technology, Accepted",
+      "meta": "IF2025: 7.5, Top 11%"
+    },
+    {
+      "section": "2026",
+      "authors": "Kangwoo Cho, Kanghyun Heo, and *Kisong Lee",
+      "title": "Blockage-Aware Anti-Jamming Data Harvesting for UAV-Assisted Communications",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 25, pp. 21688-21700, 2026",
+      "meta": "IF2025: 10.3, Top 3.5%"
+    },
+    {
+      "section": "2026",
+      "authors": "Kangwoo Cho, Kanghyun Heo, and *Kisong Lee",
+      "title": "Energy-Aware Self-Sustaining Solar-Powered UAV Swarm in Dense Urban 6G Networks With Laser WPT",
+      "venue": "IEEE Transactions on Communications, vol. 74, pp. 11879-11894, 2026",
+      "meta": "IF2025: 8.4, Top 9.6%"
+    },
+    {
+      "section": "2026",
+      "authors": "Woongsup Lee, Howon Lee, and *Kisong Lee",
+      "title": "Optimization of 3-D Trajectory and Resource Allocation in Multi-UAV Communications Under a Probabilistic Channel Model",
+      "venue": "IEEE Transactions on Cognitive Communications and Networking, vol. 12, pp. 10794-10809, 2026",
+      "meta": "IF2025: 8.0, Top 11.4%"
+    },
+    {
+      "section": "2026",
+      "authors": "Hyun-Ho Choi and *Kisong Lee",
+      "title": "Joint Optimization of Confidence Thresholds and Resource Allocation for Cooperative Inference in Mobile Edge Computing Systems",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 75, no. 6, pp. 11663-11676, Jun. 2026",
+      "meta": "IF2025: 7.5, Top 11%"
+    },
+    {
+      "section": "2026",
+      "authors": "Kisong Lee and Hyun-Ho Choi",
+      "title": "Energy-Efficient Cooperative Inference in Multidevice Edge Networks: A Lyapunov-Based Approach",
+      "venue": "IEEE Internet of Things Journal, vol. 13, no. 8, pp. 16895-16909, Apr. 2026",
+      "meta": "IF2025: 8.7, Top 5.8%"
+    },
+    {
+      "section": "2026",
+      "authors": "Kisong Lee, Gitae Park, and Sung Ho Chae",
+      "title": "Joint Trajectory and Resource Optimization for Interference Management in Space-Air-Ground Integrated Networks Under Probabilistic LoS Channels",
+      "venue": "IEEE Transactions on Communications, vol. 74, pp. 5504-5518, 2026",
+      "meta": "IF2025: 8.4, Top 9.6%"
+    },
+    {
+      "section": "2026",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Intelligent 3-D Trajectory and Resource Allocation for UAV Communications Under a Blockage-Aware Channel Model",
+      "venue": "IEEE Internet of Things Journal, vol. 13, no. 5, pp. 8928-8943, Mar. 2026",
+      "meta": "IF2025: 8.7, Top 5.8%"
+    },
+    {
+      "section": "2026",
+      "authors": "Kanghyun Heo, Gitae Park, and *Kisong Lee",
+      "title": "Building Blockage-Aided Interference Coordination for Multi-UAV-Enabled Wireless Networks",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 25, pp. 8148-8163, 2026",
+      "meta": "IF2025: 10.3, Top 3.5%"
+    },
+    {
+      "section": "2026",
+      "authors": "Gitae Park, Gihyeon Jang, Woongsup Lee, and *Kisong Lee",
+      "title": "UAV-Enabled Wireless-Powered Two-Way Communications Under Probabilistic LoS Channels",
+      "venue": "IEEE Internet of Things Journal, vol. 13, no. 2, pp. 3188-3199, Jan. 2026",
+      "meta": "IF2025: 8.7, Top 5.8%"
+    },
+    {
+      "section": "2026",
+      "authors": "Kisong Lee and Sung Ho Chae",
+      "title": "3D Trajectory and Pickup/Drop-off Strategy for UAV-Enabled Delivery: Trade-off Between Time and Energy Minimization",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems, vol. 27, no. 1, pp. 1028-1038, Jan. 2026",
+      "meta": "IF2025: 9.1, Top 3.9%"
+    },
+    {
+      "section": "2025",
+      "authors": "Hyun-Ho Choi, Kangsoo Kim, Ki-Ho Lee, and *Kisong Lee",
+      "title": "Cooperative Inference for Real-Time 3D Human Pose Estimation in Multi-Device Edge Networks",
+      "venue": "IEEE Transactions on Communications, vol. 73, no. 12, pp. 14624-14638, Dec. 2025",
+      "meta": "IF2024: 8.3, Top 7.2%"
+    },
+    {
+      "section": "2025",
+      "authors": "Kanghyun Heo, Gitae Park, and *Kisong Lee",
+      "title": "Interference Mitigation Using 3D Building Blockage for Space-Air-Ground Integrated Networks",
+      "venue": "IEEE Transactions on Communications, vol. 73, no. 12, pp. 15352-15368, Dec. 2025",
+      "meta": "IF2024: 8.3, Top 7.2%"
+    },
+    {
+      "section": "2025",
+      "authors": "Gihyeon Jang and *Kisong Lee",
+      "title": "Joint Optimization of Path Planning and Cooperative Strategy for UAV-UGV Delivery",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems, vol. 26, no. 11, pp. 20176-20186, Nov. 2025",
+      "meta": "IF2024: 8.4, Top 2.5%"
+    },
+    {
+      "section": "2025",
+      "authors": "Hyun-Ho Choi, Ki-Ho Lee, and *Kisong Lee",
+      "title": "Optimal Confidence Thresholds for Cooperative Inference in Intelligent Surveillance Systems",
+      "venue": "IEEE Internet of Things Journal, vol. 12, no. 20, pp. 42953-42964, Oct. 2025",
+      "meta": "IF2024: 8.9, Top 4.1%"
+    },
+    {
+      "section": "2025",
+      "authors": "Chaeyeon Kim, Hyun-Ho Choi, and *Kisong Lee",
+      "title": "Interference Coordination for Multi-UAV-Enabled Communications Under Probabilistic LoS Channels",
+      "venue": "IEEE Internet of Things Journal, vol. 12, no. 19, pp. 40484-40498, Oct. 2025",
+      "meta": "IF2024: 8.9, Top 4.1%"
+    },
+    {
+      "section": "2025",
+      "authors": "Soobin Yoon and *Kisong Lee",
+      "title": "Optimal Load Balancing of Cooperative UAV-UGV Parcel Pickup to Minimize Completion Time",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems, vol. 26, no. 8, pp. 12712-12718, Aug. 2025",
+      "meta": "IF2024: 8.4, Top 2.5%"
+    },
+    {
+      "section": "2024",
+      "authors": "Kanghyun Heo, Hyun-Ho Choi, and *Kisong Lee",
+      "title": "Joint Trajectory and Resource Optimization for UAV-Assisted SWIPT Systems: A Comparative Study of Linear and Nonlinear Energy Harvesting Models",
+      "venue": "IEEE Internet of Things Journal, vol. 11, no. 24, pp. 40293-40305, Dec. 2024",
+      "meta": "IF2023: 8.2, Top 3.4%"
+    },
+    {
+      "section": "2024",
+      "authors": "Gitae Park, Woongsup Lee, and *Kisong Lee",
+      "title": "3D Multi-Trajectory and Pick-Up Optimization of UAV for Minimizing Delivery Time With Weight Restriction",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems, vol. 25, no. 11, pp. 17562-17573, Nov. 2024",
+      "meta": "IF2023: 7.9, Top 2.5%"
+    },
+    {
+      "section": "2024",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Robust Trajectory and Resource Allocation for UAV Communications in Uncertain Environments With No-Fly Zone: A Deep Learning Approach",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems, vol. 25, no. 10, pp. 14233-14244, Oct. 2024",
+      "meta": "IF2023: 7.9, Top 2.5%"
+    },
+    {
+      "section": "2024",
+      "authors": "Kanghyun Heo, Gitae Park, and *Kisong Lee",
+      "title": "Joint Optimization of UAV Trajectory and Communication Resources With Complete Avoidance of No-Fly-Zones",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems, vol. 25, no. 10, pp. 14259-14265, Oct. 2024",
+      "meta": "IF2023: 7.9, Top 2.5%"
+    },
+    {
+      "section": "2024",
+      "authors": "Chaeyeon Kim, Hyun-Ho Choi, and *Kisong Lee",
+      "title": "Joint Optimization of Trajectory and Resource Allocation for Multi-UAV-Enabled Wireless-Powered Communication Networks",
+      "venue": "IEEE Transactions on Communications, vol. 72, no. 9, pp. 5752-5764, Sep. 2024",
+      "meta": "IF2023: 7.2, Top 8.9%"
+    },
+    {
+      "section": "2024",
+      "authors": "Kanghyun Heo, Woongsup Lee, and *Kisong Lee",
+      "title": "UAV-Assisted Wireless-Powered Secure Communications: Integration of Optimization and Deep Learning",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 23, no. 9, pp. 10530-10545, Sep. 2024",
+      "meta": "IF2023: 8.9, Top 3.6%"
+    },
+    {
+      "section": "2024",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Deep Learning Frameworks for Solving Infeasible Optimization Problems in Vehicular Communications",
+      "venue": "IEEE Open Journal of the Communications Society, vol. 5, pp. 3289-3298, 2024",
+      "meta": "IF2023: 6.3"
+    },
+    {
+      "section": "2024",
+      "authors": "Sang-Eun Jeon, Jae-Wook Jung, Kisong Lee, and Jun-Pyo Hong",
+      "title": "Learning-Based Joint User Association and Cache Replacement for Cache-Enabled Cloud RAN",
+      "venue": "IEEE Open Journal of the Communications Society, vol. 5, pp. 3038-3049, 2024",
+      "meta": "IF2023: 6.3"
+    },
+    {
+      "section": "2024",
+      "authors": "Kisong Lee and Hyun-Ho Choi",
+      "title": "Energy-Efficient Resource Allocation for Bidirectional Wireless Power and Information Transfer over Interference Channels",
+      "venue": "Journal of Network and Computer Applications, vol. 227, Jul. 2024, Art. no. 103887",
+      "meta": "IF2023: 7.7, Top 4.2%"
+    },
+    {
+      "section": "2024",
+      "authors": "Hyun-Ho Choi, Gitae Park, Kanghyun Heo, and *Kisong Lee",
+      "title": "Joint Optimization of Beam Placement and Transmit Power for Multibeam LEO Satellite Communication Systems",
+      "venue": "IEEE Internet of Things Journal, vol. 11, no. 8, pp. 14804-14813, Apr. 2024",
+      "meta": "IF2023: 8.2, Top 3.4%"
+    },
+    {
+      "section": "2024",
+      "authors": "Gitae Park, Kanghyun Heo, Woongsup Lee, and *Kisong Lee",
+      "title": "UAV-Assisted Wireless-Powered Two-Way Communications",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems, vol. 25, no. 3, pp. 2641-2655, Mar. 2024",
+      "meta": "IF2023: 7.9, Top 2.5%"
+    },
+    {
+      "section": "2023",
+      "authors": "Kisong Lee, Hyun-Ho Choi, Woongsup Lee, and Victor C. M. Leung",
+      "title": "Wireless-Powered Interference Networks: Applications, Approaches, and Challenges",
+      "venue": "IEEE Vehicular Technology Magazine, vol. 18, no. 4, pp. 102-110, Dec. 2023",
+      "meta": "IF2022: 8.1, Top 10.4%"
+    },
+    {
+      "section": "2023",
+      "authors": "Kisong Lee and Woongsup Lee",
+      "title": "Deep Learning Framework for Two-Way MISO Wireless-Powered Interference Channels",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 22, no. 10, pp. 6459-6473, Oct. 2023",
+      "meta": "IF2022: 10.4, Top 5.6%"
+    },
+    {
+      "section": "2023",
+      "authors": "Kisong Lee and Hyun-Ho Choi",
+      "title": "Transmit Power Control for Secure Wireless-Powered Sensor Networks With Malicious Energy Harvester",
+      "venue": "IEEE Access, vol. 11, pp. 103146-103153, Sep. 2023",
+      "meta": "IF2022: 3.9"
+    },
+    {
+      "section": "2023",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Deep Learning-Based Energy Efficient Resource Allocation for Underlay Cognitive MISO Interference Channels",
+      "venue": "IEEE Transactions on Cognitive Communications and Networking, vol. 9, no. 3, pp. 695-707, Jun. 2023",
+      "meta": "IF2022: 8.6, Top 8.5%"
+    },
+    {
+      "section": "2023",
+      "authors": "Sung Ho Chae and *Kisong Lee",
+      "title": "Cooperative Communication for the Rank-Deficient MIMO Interference Channel with a Reconfigurable Intelligent Surface",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 22, no. 3, pp. 2099-2112, Mar. 2023",
+      "meta": "IF2022: 10.4, Top 5.6%"
+    },
+    {
+      "section": "2022",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Deep Learning-Based Transmit Power Control for Wireless-Powered Secure Communications With Heterogeneous Channel Uncertainty",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 71, no. 10, pp. 11150-11159, Oct. 2022",
+      "meta": "IF2021: 6.239, Top 13.59%"
+    },
+    {
+      "section": "2022",
+      "authors": "Woongsup Lee, *Kisong Lee, and Tony Q. S. Quek",
+      "title": "Deep Learning-Assisted Wireless-Powered Secure Communications With Imperfect Channel State Information",
+      "venue": "IEEE Internet of Things Journal, vol. 9, no. 13, pp. 11464-11476, Jul. 2022",
+      "meta": "IF2021: 10.238, Top 5.18%"
+    },
+    {
+      "section": "2022",
+      "authors": "Kisong Lee and Hyun-Ho Choi",
+      "title": "Weighted Sum Rate Maximization for Two-Way Wireless Powered Interference Channels",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 71, no. 5, pp. 5627-5632, May 2022",
+      "meta": "IF2021: 6.239, Top 13.59%"
+    },
+    {
+      "section": "2022",
+      "authors": "Kisong Lee, Hyun-Ho Choi, Woongsup Lee, and Victor C. M. Leung",
+      "title": "Learning-Based Optimization of Wireless-Powered Two-Way Interference Channels With Imperfect CSI",
+      "venue": "IEEE Internet of Things Journal, vol. 9, no. 9, pp. 6934-6943, May 2022",
+      "meta": "IF2021: 10.238, Top 5.18%"
+    },
+    {
+      "section": "2022",
+      "authors": "Kisong Lee and Sung Ho Chae",
+      "title": "Comparative Study of Achievable Efficiency Between Three- and Four-Coil Wireless Power Transfer Systems",
+      "venue": "IEEE Journal of Emerging and Selected Topics in Power Electronics, vol. 10, no. 2, pp. 2138-2146, Apr. 2022",
+      "meta": "IF2021: 5.462"
+    },
+    {
+      "section": "2021",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Robust Transmit Power Control With Imperfect CSI Using a Deep Neural Network",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 70, no. 11, pp. 12266-12271, Nov. 2021",
+      "meta": "IF2020: 5.978, Top 11.54%"
+    },
+    {
+      "section": "2021",
+      "authors": "Kisong Lee, Jun-Pyo Hong, and Woongsup Lee",
+      "title": "Deep Learning Framework for Secure Communication With an Energy Harvesting Receiver",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 70, no. 10, pp. 10121-10132, Oct. 2021",
+      "meta": "IF2020: 5.978, Top 11.54%"
+    },
+    {
+      "section": "2021",
+      "authors": "Muy Sengly, Kisong Lee, and Jung-Ryun Lee",
+      "title": "Joint Optimization of Spectral Efficiency and Energy Harvesting in D2D Networks Using Deep Neural Network",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 70, no. 8, pp. 8361-8366, Aug. 2021",
+      "meta": "IF2020: 5.978, Top 11.54%"
+    },
+    {
+      "section": "2021",
+      "authors": "Woongsup Lee, *Kisong Lee, Hyun-Ho Choi, and Victor C. M. Leung",
+      "title": "Deep Learning for SWIPT: Optimization of Transmit-Harvest-Respond in Wireless-Powered Interference Channel",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 20, no. 8, pp. 5018-5033, Aug. 2021",
+      "meta": "IF2020: 7.016, Top 7.88%"
+    },
+    {
+      "section": "2021",
+      "authors": "Hyun-Ho Choi and *Kisong Lee",
+      "title": "Wireless Energy Sharing for Maximizing Lifetime of Linear Multihop Communications",
+      "venue": "IEEE Internet of Things Journal, vol. 8, no. 15, pp. 12189-12202, Aug. 2021",
+      "meta": "IF2020: 9.471, Top 3.42%"
+    },
+    {
+      "section": "2021",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Deep Learning-Aided Distributed Transmit Power Control in Underlay Cognitive Radio Networks",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 70, no. 4, pp. 3990-3994, Apr. 2021",
+      "meta": "IF2020: 5.978, Top 11.54%"
+    },
+    {
+      "section": "2021",
+      "authors": "Hyun-Ho Choi and *Kisong Lee",
+      "title": "Cooperative Wireless Power Transfer for Lifetime Maximization in Wireless Multihop Networks",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 70, no. 4, pp. 3984-3989, Apr. 2021",
+      "meta": "IF2020: 5.978, Top 11.54%"
+    },
+    {
+      "section": "2021",
+      "authors": "Kisong Lee and Woongsup Lee",
+      "title": "Effect of Misaligned Relay on Output Power and Efficiency in Wireless Power Transfer",
+      "venue": "IEEE Access, vol. 9, pp. 49448-49456, Apr. 2021",
+      "meta": "IF2020: 3.367"
+    },
+    {
+      "section": "2021",
+      "authors": "Sung Ho Chae and *Kisong Lee",
+      "title": "Cooperative Relaying for Multi-user MIMO Wireless Backhaul Networks",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 70, no. 3, pp. 2794-2806, Mar. 2021",
+      "meta": "IF2020: 5.978, Top 11.54%"
+    },
+    {
+      "section": "2021",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Resource Allocation Scheme for Guarantee of QoS in D2D Communications Using Deep Neural Network",
+      "venue": "IEEE Communications Letters, vol. 25, no. 3, pp. 887-891, Mar. 2021",
+      "meta": "IF2020: 3.436"
+    },
+    {
+      "section": "2021",
+      "authors": "Hyun-Ho Choi and *Kisong Lee",
+      "title": "Bioinspired Cooperative Wireless Energy Transfer for Lifetime Maximization in Multihop Networks",
+      "venue": "IEEE Internet of Things Journal, vol. 8, no. 3, pp. 1611-1622, Feb. 2021",
+      "meta": "IF2020: 9.471, Top 3.42%"
+    },
+    {
+      "section": "2021",
+      "authors": "Kisong Lee, Junseong Bang, and Hyun-Ho Choi",
+      "title": "Secrecy Outage Minimization for Wireless-Powered Relay Networks with Destination-Assisted Cooperative Jamming",
+      "venue": "IEEE Internet of Things Journal, vol. 8, no. 3, pp. 1467-1476, Feb. 2021",
+      "meta": "IF2020: 9.471, Top 3.42%"
+    },
+    {
+      "section": "2020",
+      "authors": "Kisong Lee and Woongsup Lee",
+      "title": "Learning-Based Resource Management for SWIPT",
+      "venue": "IEEE Systems Journal, vol. 14, no. 4, pp. 4750-4753, Dec. 2020",
+      "meta": "IF2019: 3.987"
+    },
+    {
+      "section": "2020",
+      "authors": "Jin-Taek Lim, *Kisong Lee, and Youngnam Han",
+      "title": "Secure Communication with Outdated Channel State Information via Untrusted Relay Capable of Energy Harvesting",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 69, no. 10, pp. 11323-11337, Oct. 2020",
+      "meta": "IF2019: 5.379, Top 12.59%"
+    },
+    {
+      "section": "2020",
+      "authors": "Kisong Lee, Jun-Pyo Hong, and Hyun-Ho Choi",
+      "title": "Adaptive Jamming Power Control for Untrusted Relay Networks With Imperfect Channel Reciprocity",
+      "venue": "IEEE Systems Journal, vol. 14, no. 3, pp. 4217-4220, Sep. 2020",
+      "meta": "IF2019: 3.987"
+    },
+    {
+      "section": "2020",
+      "authors": "Dara Ron, Chan-Jae Lee, Kisong Lee, Hyun-Ho Choi, and Jung-Ryun Lee",
+      "title": "Performance Analysis and Optimization of Downlink Transmission in LoRaWAN Class B Mode",
+      "venue": "IEEE Internet of Things Journal, vol. 7, no. 8, pp. 7836-7847, Aug. 2020",
+      "meta": "IF2019: 9.936, Top 1.6%"
+    },
+    {
+      "section": "2020",
+      "authors": "Junseob Lee and *Kisong Lee",
+      "title": "Effects of Number of Relays on Achievable Efficiency of Magnetic Resonant Wireless Power Transfer",
+      "venue": "IEEE Transactions on Power Electronics, vol. 35, no. 7, pp. 6697-6700, Jul. 2020",
+      "meta": "IF2019: 6.373, Top 8.08%"
+    },
+    {
+      "section": "2020",
+      "authors": "Kisong Lee and Sung Ho Chae",
+      "title": "Comparative Analysis of Frequency-Selective Wireless Power Transfer for Multiple-Rx Systems",
+      "venue": "IEEE Transactions on Power Electronics, vol. 35, no. 5, pp. 5122-5131, May 2020",
+      "meta": "IF2019: 6.373, Top 8.08%"
+    },
+    {
+      "section": "2020",
+      "authors": "Kisong Lee, Jung-Ryun Lee, and Hyun-Ho Choi",
+      "title": "Learning-Based Joint Optimization of Transmit Power and Harvesting Time in Wireless-Powered Networks With Co-Channel Interference",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 69, no. 3, pp. 3500-3504, Mar. 2020",
+      "meta": "IF2019: 5.379, Top 12.59%"
+    },
+    {
+      "section": "2020",
+      "authors": "Kisong Lee and Hyun-Ho Choi",
+      "title": "Fast Wireless Power Transfer for Multiple Receivers in Linear Topology",
+      "venue": "IEEE Systems Journal, vol. 14, no. 1, pp. 649-652, Mar. 2020",
+      "meta": "IF2019: 3.987"
+    },
+    {
+      "section": "2020",
+      "authors": "Kisong Lee, Jun-Pyo Hong, Hyowoon Seo, and Wan Choi",
+      "title": "Learning-Based Resource Management in Device-to-Device Communications With Energy Harvesting Requirements",
+      "venue": "IEEE Transactions on Communications, vol. 68, no. 1, pp. 402-413, Jan. 2020",
+      "meta": "IF2019: 5.646, Top 10.71%"
+    },
+    {
+      "section": "2020",
+      "authors": "Kisong Lee, Jin-Taek Lim, and Hyun-Ho Choi",
+      "title": "Impact of Outdated CSI on the Secrecy Performance of Wireless-Powered Untrusted Relay Networks",
+      "venue": "IEEE Transactions on Information Forensics and Security, vol. 15, no. 1, pp. 1423-1433, Jan. 2020",
+      "meta": "IF2019: 6.013, Top 7.87%"
+    },
+    {
+      "section": "2019",
+      "authors": "Kisong Lee and JeongGil Ko",
+      "title": "RF-Based Energy Transfer Through Packets: Still a Dream? or a Dream Come True?",
+      "venue": "IEEE Access, vol. 7, pp. 163840-163850, Nov. 2019",
+      "meta": "IF2018: 4.098"
+    },
+    {
+      "section": "2019",
+      "authors": "Kisong Lee, Cheol Jeong, and Sung Ho Chae",
+      "title": "Analysis of Factors Effecting on Optimal Configuration of Two Receivers for a Three-Coil Wireless Power Transfer System",
+      "venue": "IEEE Systems Journal, vol. 13, no. 2, pp. 1328-1331, Jun. 2019",
+      "meta": "IF2018: 4.463, Top 6.55%"
+    },
+    {
+      "section": "2019",
+      "authors": "Kisong Lee, Jun-Pyo Hong, Hyun-Ho Choi, and Tony Q. S. Quek",
+      "title": "Wireless-Powered Two-Way Relaying Protocols for Optimizing Physical Layer Security",
+      "venue": "IEEE Transactions on Information Forensics and Security, vol. 14, no. 1, pp. 162-174, Jan. 2019",
+      "meta": "IF2018: 6.211, Top 4.29%"
+    },
+    {
+      "section": "2018",
+      "authors": "Kisong Lee and Hyun-Ho Choi",
+      "title": "Secure Analog Network Coding With Wireless Energy Harvesting Under Multiple Eavesdroppers",
+      "venue": "IEEE Access, vol. 6, pp. 76289-76301, Dec. 2018",
+      "meta": "IF2017: 3.557"
+    },
+    {
+      "section": "2018",
+      "authors": "Won-Kyu Choi, Chan-Won Park, and *Kisong Lee",
+      "title": "Circuit Analysis of Achievable Transmission Efficiency in an Overcoupled Region for Wireless Power Transfer Systems",
+      "venue": "IEEE Systems Journal, vol. 12, no. 4, pp. 3873-3876, Dec. 2018",
+      "meta": "IF2017: 4.337, Top 4.17%"
+    },
+    {
+      "section": "2018",
+      "authors": "Sung Ho Chae, Cheol Jeong, and *Kisong Lee",
+      "title": "Cooperative Communication for Cognitive Satellite Networks",
+      "venue": "IEEE Transactions on Communications, vol. 66, no. 11, pp. 5140-5154, Nov. 2018",
+      "meta": "IF2017: 4.671, Top 9.77%"
+    },
+    {
+      "section": "2018",
+      "authors": "Minhoe Kim, *Kisong Lee, and Dong-Ho Cho",
+      "title": "Proportional Fair Resource Allocation in Energy Harvesting-Based Wireless Networks",
+      "venue": "IEEE Systems Journal, vol. 12, no. 3, pp. 2399-2402, Sep. 2018",
+      "meta": "IF2017: 4.337, Top 4.17%"
+    },
+    {
+      "section": "2018",
+      "authors": "Byung Chang Chung, *Kisong Lee, and Dong-Ho Cho",
+      "title": "Proportional Fair Energy-Efficient Resource Allocation in Energy-Harvesting-Based Wireless Networks",
+      "venue": "IEEE Systems Journal, vol. 12, no. 3, pp. 2106-2116, Sep. 2018",
+      "meta": "IF2017: 4.337, Top 4.17%"
+    },
+    {
+      "section": "2018",
+      "authors": "Kisong Lee, Jun-Pyo Hong, Hyun-Ho Choi, and Marco Levorato",
+      "title": "Adaptive Wireless-Powered Relaying Schemes With Cooperative Jamming for Two-Hop Secure Communication",
+      "venue": "IEEE Internet of Things Journal, vol. 5, no. 4, pp. 2793-2803, Aug. 2018",
+      "meta": "IF2017: 5.874, Top 3.04%"
+    },
+    {
+      "section": "2018",
+      "authors": "Kisong Lee, Changbae Yoon, Ohyun Jo, and Woongsup Lee",
+      "title": "Joint Optimization of Spectrum Sensing and Transmit Power in Energy Harvesting-Based Cognitive Radio Networks",
+      "venue": "IEEE Access, vol. 6, pp. 30653-30662, Jun. 2018",
+      "meta": "IF2017: 3.557"
+    },
+    {
+      "section": "2018",
+      "authors": "Jun-Pyo Hong, Seong Ho Chae, and *Kisong Lee",
+      "title": "Network Throughput Gain of Multicast With User Caching in Heavy Traffic Downlink",
+      "venue": "IEEE Access, vol. 6, pp. 26626-26635, Jun. 2018",
+      "meta": "IF2017: 3.557"
+    },
+    {
+      "section": "2018",
+      "authors": "Kisong Lee and JeongGil Ko",
+      "title": "Wireless Information and Power Transfer: Probability-Based Power Allocation and Splitting With Low Complexity",
+      "venue": "IEEE Systems Journal, vol. 12, no. 1, pp. 1060-1064, Mar. 2018",
+      "meta": "IF2017: 4.337, Top 4.17%"
+    },
+    {
+      "section": "2018",
+      "authors": "Kisong Lee and Sung Ho Chae",
+      "title": "Power Transfer Efficiency Analysis of Intermediate-Resonator for Wireless Power Transfer",
+      "venue": "IEEE Transactions on Power Electronics, vol. 33, no. 3, pp. 2484-2493, Mar. 2018",
+      "meta": "IF2017: 6.812, Top 5.19%"
+    },
+    {
+      "section": "2017",
+      "authors": "Kisong Lee and Jun-Pyo Hong",
+      "title": "Power Control for Energy Efficient D2D Communication in Heterogeneous Networks With Eavesdropper",
+      "venue": "IEEE Communications Letters, vol. 21, no. 11, pp. 2536-2539, Nov. 2017",
+      "meta": "IF2016: 1.988"
+    },
+    {
+      "section": "2017",
+      "authors": "Sung Ho Chae and *Kisong Lee",
+      "title": "Degrees of Freedom of Full-Duplex Cellular Networks: Effect of Self-Interference",
+      "venue": "IEEE Transactions on Communications, vol. 65, no. 10, pp. 4507-4518, Oct. 2017",
+      "meta": "IF2016: 4.058, Top 11.8%"
+    },
+    {
+      "section": "2017",
+      "authors": "Kisong Lee and Sung Ho Chae",
+      "title": "Effect of Quality Factor on Determining the Optimal Position of a Transmitter in Wireless Power Transfer Using a Relay",
+      "venue": "IEEE Microwave and Wireless Components Letters, vol. 27, no. 5, pp. 521-523, May 2017",
+      "meta": "IF2016: 1.887"
+    },
+    {
+      "section": "2017",
+      "authors": "Jeongman Lee, *Kisong Lee, and Dong-Ho Cho",
+      "title": "Stability Improvement of Transmission Efficiency Based on a Relay Resonator in a Wireless Power Transfer System",
+      "venue": "IEEE Transactions on Power Electronics, vol. 32, no. 5, pp. 3297-3300, May 2017",
+      "meta": "IF2016: 7.151, Top 4.77%"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee and Jun-Pyo Hong",
+      "title": "Energy-Efficient Resource Allocation for Simultaneous Information and Energy Transfer With Imperfect Channel Estimation",
+      "venue": "IEEE Transactions on Vehicular Technology, vol. 65, no. 4, pp. 2775-2780, Apr. 2016",
+      "meta": "IF2015: 2.243"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee, Howon Lee, and Dong-Ho Cho",
+      "title": "On the Low-Complexity Resource Allocation for Self-Healing With Reduced Message Passing in Indoor Wireless Communication Systems",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 15, no. 3, pp. 2080-2089, Mar. 2016",
+      "meta": "IF2015: 2.925, Top 6.71%"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee and Dong-Ho Cho",
+      "title": "Analysis of Wireless Power Transfer for Adjustable Power Distribution among Multiple Receivers",
+      "venue": "IEEE Antennas and Wireless Propagation Letters, vol. 14, pp. 950-953, Apr. 2015",
+      "meta": "IF2014: 1.579"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Howon Lee, Hoon Kim, and *Kisong Lee",
+      "title": "Collaborative Self-Healing With Opportunistic IBS Selection in Indoor Wireless Communication Systems",
+      "venue": "IEEE Communications Letters, vol. 18, no. 12, pp. 2209-2212, Dec. 2014",
+      "meta": "IF2013: 1.463"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee, Howon Lee, Yong-Up Jang, and Dong-Ho Cho",
+      "title": "CoBRA: Cooperative Beamforming-Based Resource Allocation for Self-Healing in SON-Based Indoor Mobile Communication System",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 12, no. 11, pp. 5520-5528, Nov. 2013",
+      "meta": "IF2012: 2.418, Top 8.33%"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee and Dong-Ho Cho",
+      "title": "Maximizing the Capacity of Magnetic Induction Communication for Embedded Sensor Networks in Strongly and Loosely Coupled Regions",
+      "venue": "IEEE Transactions on Magnetics, vol. 49, no. 9, pp. 5055-5062, Sep. 2013",
+      "meta": "IF2012: 1.422"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee and Dong-Ho Cho",
+      "title": "Diversity Analysis of Multiple Transmitters in Wireless Power Transfer System",
+      "venue": "IEEE Transactions on Magnetics, vol. 49, no. 6, pp. 2946-2952, Jun. 2013",
+      "meta": "IF2012: 1.422"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee, Howon Lee, and Dong-Ho Cho",
+      "title": "Fairness-Aware Cooperative Resource Allocation for Self-Healing in SON-based Indoor System",
+      "venue": "IEEE Communications Letters, vol. 16, no. 7, pp. 1030-1033, Jul. 2012",
+      "meta": "IF2011: 0.982"
+    },
+    {
+      "section": "2016 and Before",
+      "authors": "Kisong Lee, Ohyun Jo, and Dong-Ho Cho",
+      "title": "Cooperative Resource Allocation for Guaranteeing Intercell Fairness in Femtocell Networks",
+      "venue": "IEEE Communications Letters, vol. 15, no. 2, pp. 214-216, Feb. 2011",
+      "meta": "IF2010: 1.060"
+    }
+  ]
+}
