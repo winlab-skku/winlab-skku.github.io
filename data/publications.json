@@ -24,13 +24,6 @@
     },
     {
       "section": "Under Review",
-      "authors": "Woongsup Lee and *Kisong Lee",
-      "title": "Intelligent 3D Trajectory Planning and Resource Allocation for Heterogeneous Multi-UAV Communications Using Deep Learning",
-      "venue": "Under Major Revision",
-      "meta": ""
-    },
-    {
-      "section": "Under Review",
       "authors": "Gitae Park, Kanghyun Heo, and *Kisong Lee",
       "title": "Blockage-Aware UAV-Assisted Wireless Data Harvesting With Building Avoidance",
       "venue": "Under Major Revision",
@@ -112,6 +105,13 @@
       "title": "Proactive Eavesdropping With Building-Induced Concealment in Urban UAV Networks",
       "venue": "Under Review",
       "meta": ""
+    },
+    {
+      "section": "Early Access",
+      "title": "Intelligent 3D Trajectory Planning and Resource Allocation for Heterogeneous Multi-UAV Communications Using Deep Learning",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "venue": "IEEE Transactions on Wireless Communications, Accepted",
+      "meta": "IF2025: 10.3, Top 3.5%"
     },
     {
       "section": "Early Access",
