@@ -115,13 +115,6 @@
     },
     {
       "section": "Early Access",
-      "authors": "Jun-Pyo Hong, Hyowoon Seo, and *Kisong Lee",
-      "title": "Distribution-Level AirComp for Wireless Federated Learning under Data Scarcity and Heterogeneity",
-      "venue": "IEEE Transactions on Wireless Communications, Accepted",
-      "meta": "IF2025: 10.3, Top 3.5%"
-    },
-    {
-      "section": "Early Access",
       "authors": "Gitae Park, Woongsup Lee, and *Kisong Lee",
       "title": "Joint Path Planning and Cooperative Strategy Optimization for Multi-UAV Heavy-Payload Pickup-and-Delivery",
       "venue": "IEEE Transactions on Vehicular Technology, Accepted",
@@ -140,6 +133,13 @@
       "title": "Joint Beam Placement and Power Optimization for Broadcast and Multicast Services in Multi-Beam LEO Satellite Systems",
       "venue": "IEEE Transactions on Vehicular Technology, Accepted",
       "meta": "IF2025: 7.5, Top 11%"
+    },
+    {
+      "section": "2026",
+      "title": "Distribution-Level AirComp for Wireless Federated Learning under Data Scarcity and Heterogeneity",
+      "authors": "Jun-Pyo Hong, Hyowoon Seo, and *Kisong Lee",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 25, pp. 23080-23096, 2026",
+      "meta": "IF2025: 10.3, Top 3.5%"
     },
     {
       "section": "2026",
