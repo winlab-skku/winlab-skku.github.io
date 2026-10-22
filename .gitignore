@@ -4,3 +4,4 @@ dist/
 *.spec
 _backup/
 .sync-state.json
+MANUAL.md

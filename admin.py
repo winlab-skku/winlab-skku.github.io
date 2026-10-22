@@ -22,6 +22,7 @@ SITE_URL = f"https://{REPO}/" if REPO.endswith(".github.io") else f"https://{OWN
 PORT = 8765
 STATE_FILE = ".sync-state.json"     # what this folder last matched on GitHub (local only)
 BACKUP_DIR = "_backup"              # local copies kept before GitHub versions replace them
+LOCAL_ONLY = {"MANUAL.md"}          # kept in this folder only: never uploaded, never touched by sync
 API = os.environ.get("WINLAB_GITHUB_API", "https://api.github.com")
 RAW = os.environ.get("WINLAB_GITHUB_RAW", "https://raw.githubusercontent.com")
 
@@ -37,6 +38,8 @@ def ignored(path):
     (a running .exe cannot be overwritten on Windows, and a 17 MB upload per deploy is wasteful)."""
     parts = path.split("/")
     name = parts[-1]
+    if len(parts) == 1 and name in LOCAL_ONLY:
+        return True
     if parts[0] in ("build", "dist", BACKUP_DIR) and len(parts) > 1:
         return True
     if any(p in (".git", "__pycache__", ".venv", "venv", "node_modules") for p in parts):
