@@ -154,7 +154,9 @@ def build_publications(site, pubs):
 
 
 def pubs_for(pubs, name):
-    return [it for it in pubs["items"] if re.search(rf'(?<!\w){re.escape(name)}(?!\w)', it["authors"])]
+    """Papers by `name`, in the same order as the Publications page: section order first, then list order."""
+    return [it for sec, items in grouped(pubs) for it in items
+            if re.search(rf'(?<!\w){re.escape(name)}(?!\w)', it["authors"])]
 
 
 def _pub_rows(site, items):
@@ -180,8 +182,8 @@ def _collapsible(rows, n_vis):
 
 
 def member_pubs_html(site, pubs, name):
-    """Two fields: 'Publications' = accepted (Early Access) + published, newest first, following the order of
-    publications.json (Early Access, then years descending); 'Under Review' = submitted/in revision."""
+    """Two fields: 'Publications' = accepted (Early Access) + published; 'Under Review' = submitted/in revision.
+    Both follow the Publications page order (see pubs_for)."""
     items = pubs_for(pubs, name)
     if not items:
         return ""
