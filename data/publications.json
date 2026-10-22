@@ -37,13 +37,6 @@
       "meta": ""
     },
     {
-      "section": "Early Access",
-      "authors": "Hyungwoo Lee, Kanghyun Heo, and *Kisong Lee",
-      "title": "Blockage-Aware Wireless-Powered Two-Way Communications for UAV-Aided Communications",
-      "venue": "IEEE Internet of Things Journal, Accepted",
-      "meta": "IF2025: 8.7, Top 5.8%"
-    },
-    {
       "section": "Under Review",
       "authors": "Chaeyeon Kim and *Kisong Lee",
       "title": "Blockage-Aware Joint Optimization of Mobile Access Point Placement and Resource Allocation for Interference Management in Heterogeneous Networks",
@@ -107,11 +100,32 @@
       "meta": ""
     },
     {
+      "section": "Under Review",
+      "authors": "Gihyeon Jang, *Kisong Lee, and Jun-Pyo Hong",
+      "title": "Uncertainty-Aware Adaptive Bayesian Federated Learning for Wireless Edge Networks",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Gitae Park, Hyowoon Seo, Dong In Kim, and *Kisong Lee",
+      "title": "Blockage-Aware Beamforming for Pinching Antenna Systems with Partial CSI",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Gihyeon Jang, Hyowoon Seo, and *Kisong Lee",
+      "title": "Online Blockage-Aware Trajectory and Resource Optimization for UAV-Enabled MEC Systems",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
       "section": "Early Access",
-      "title": "Intelligent 3D Trajectory Planning and Resource Allocation for Heterogeneous Multi-UAV Communications Using Deep Learning",
-      "authors": "Woongsup Lee and *Kisong Lee",
-      "venue": "IEEE Transactions on Wireless Communications, Accepted",
-      "meta": "IF2025: 10.3, Top 3.5%"
+      "authors": "Hyungwoo Lee, Kanghyun Heo, and *Kisong Lee",
+      "title": "Blockage-Aware Wireless-Powered Two-Way Communications for UAV-Aided Communications",
+      "venue": "IEEE Internet of Things Journal, Accepted",
+      "meta": "IF2025: 8.7, Top 5.8%"
     },
     {
       "section": "Early Access",
@@ -136,8 +150,15 @@
     },
     {
       "section": "2026",
-      "title": "Distribution-Level AirComp for Wireless Federated Learning under Data Scarcity and Heterogeneity",
+      "authors": "Woongsup Lee and *Kisong Lee",
+      "title": "Intelligent 3D Trajectory Planning and Resource Allocation for Heterogeneous Multi-UAV Communications Using Deep Learning",
+      "venue": "IEEE Transactions on Wireless Communications, vol. 25, pp. 24376-24392, 2026",
+      "meta": "IF2025: 10.3, Top 3.5%"
+    },
+    {
+      "section": "2026",
       "authors": "Jun-Pyo Hong, Hyowoon Seo, and *Kisong Lee",
+      "title": "Distribution-Level AirComp for Wireless Federated Learning under Data Scarcity and Heterogeneity",
       "venue": "IEEE Transactions on Wireless Communications, vol. 25, pp. 23080-23096, 2026",
       "meta": "IF2025: 10.3, Top 3.5%"
     },

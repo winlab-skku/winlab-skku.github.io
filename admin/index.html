@@ -78,6 +78,14 @@
   .flist .k { display:inline-block; min-width:62px; color:var(--ink3); }
   .steps { margin:8px 0 0 18px; padding:0; font-size:14px; }
   .steps li { margin:4px 0; }
+  .dlist { margin:4px 0 12px; padding:0; list-style:none; font-size:14px; }
+  .dlist > li { padding:5px 0; border-bottom:1px solid var(--rule); display:grid; grid-template-columns:170px 1fr; column-gap:12px; }
+  .dlist > li:last-child { border-bottom:0; }
+  .dlist .k { font-size:12px; color:var(--ink3); padding-top:2px; grid-row:span 4; }
+  .dlist .chg { grid-column:2; font-size:12.5px; color:var(--ink2); margin-top:2px; }
+  @media (max-width:800px) { .dlist > li { grid-template-columns:1fr; } .dlist .chg { grid-column:1; } }
+  .dlist .chg s { color:var(--ink3); }
+  .dhead { font-size:14px; margin:14px 0 2px; }
   code { font-size:12.5px; background:var(--panel); padding:1px 5px; border-radius:4px; }
   @media (max-width:800px) { header { gap:12px; padding:0 14px; } header #root, header > span:nth-child(2), .bar .status { display:none; } .layout { grid-template-columns:1fr; } nav { display:flex; overflow-x:auto; } nav button.on { border-right:0; border-bottom:3px solid var(--accent); } .bar { left:0; } main { padding:20px; } .row { grid-template-columns:1fr; } }
 </style>
@@ -219,7 +227,9 @@ function renderMembers(m) {
 function renderPubs(m) {
   const Pb = D.pubs;
   m.innerHTML = `<h1>Publications</h1><p class="hint">저자에서 교신저자는 이름 앞에 <code>*</code>를 붙이세요 (예: <code>Gitae Park and *Kisong Lee</code>). Under Review / Early Access 항목의 저널 칸에는 상태(Under Major Revision 등)나 "저널명, Accepted"를 적습니다.</p>
+    ${cvCard()}
     <div class="tools" style="justify-content:flex-start;margin-bottom:16px"><button id="addSec">+ 섹션(연도) 추가</button></div><div id="secs"></div>`;
+  bindCv();
   const draw = () => {
     const box = $('#secs'); box.innerHTML = '';
     Pb.sections.forEach((sec, si) => {
@@ -325,6 +335,58 @@ async function saveBuild(quiet) {
 $('#save').onclick = () => saveBuild(false);
 $('#reload').onclick = () => { if (!dirty || confirm('저장하지 않은 변경사항을 버릴까요?')) load(); };
 document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); $('#save').click(); } });
+
+// ---------- professor's CV → publications
+const cvDefault = () => (D.site.settings && D.site.settings.cv_publications_url) || D.cv_url;
+const FIELD = {section:'섹션', authors:'저자', title:'제목', venue:'저널/상태', meta:'IF'};
+function cvCard() {
+  return `<div class="card" style="border-left:4px solid var(--accent);margin-bottom:18px">
+    <b>교수님 CV와 맞추기</b>
+    <p class="hint" style="margin:4px 0 8px">CV 사이트의 Publications 페이지를 읽어서 이 목록을 그대로 맞춥니다. 무엇이 바뀌는지 먼저 보여드리고, 확인한 뒤에 적용합니다.</p>
+    <div class="row"><label>CV 주소</label><input type="text" id="cvUrl" value="${esc(cvDefault())}" spellcheck="false"></div>
+    <div class="tools" style="justify-content:flex-start"><button class="btn primary" id="cvFetch">CV에서 가져오기</button><button id="cvPasteBtn">자동으로 안 될 때: 직접 붙여넣기</button></div>
+    <div id="cvPaste" hidden><textarea id="cvText" style="min-height:140px" placeholder="CV의 Publications 페이지에서 Ctrl+A → Ctrl+C 한 내용을 여기에 붙여넣으세요"></textarea>
+      <div class="tools" style="justify-content:flex-start"><button class="btn primary" id="cvRead">붙여넣은 내용 읽기</button></div></div>
+    <div id="cvResult"></div>
+  </div>`;
+}
+function bindCv() {
+  $('#cvFetch').onclick = () => cvImport({url: $('#cvUrl').value.trim()});
+  $('#cvPasteBtn').onclick = () => { $('#cvPaste').hidden = !$('#cvPaste').hidden; if (!$('#cvPaste').hidden) $('#cvText').focus(); };
+  $('#cvRead').onclick = () => { const t = $('#cvText').value; if (t.trim()) cvImport({text: t}); };
+}
+async function cvImport(body) {
+  const box = $('#cvResult'); box.innerHTML = '<p class="hint" style="margin:10px 0 0">CV를 읽는 중…</p>';
+  setStatus('교수님 CV를 읽는 중…');
+  try { const r = await api('/api/cv-import', {...body, current: D.pubs}); showCvDiff(r); setStatus('CV를 읽었습니다. 바뀌는 내용을 확인하세요.'); }
+  catch (e) { box.innerHTML = `<div class="note err" style="margin:10px 0 0"><b>CV를 가져오지 못했습니다</b><p>${esc(e.message)}</p></div>`; setStatus('CV 가져오기 실패.', 'err'); }
+}
+function showCvDiff(r) {
+  const d = r.diff, box = $('#cvResult');
+  const counts = r.pubs.sections.map(s => `${esc(s)} ${d.counts[s]}`).join(' · ');   // keep page order (JS sorts numeric keys)
+  let out = `<p style="margin:12px 0 4px"><b>CV에서 ${d.total}편을 읽었습니다</b><br><span class="hint">${counts}</span></p>`;
+  if (d.same) { box.innerHTML = out + `<div class="note info" style="margin:8px 0 0"><b>랩 사이트 목록이 이미 CV와 같습니다</b><p>바꿀 것이 없습니다.</p></div>`; return; }
+  if (d.total < d.current_total * 0.7) out += `<div class="note err" style="margin:8px 0"><b>읽은 논문 수가 지금(${d.current_total}편)보다 훨씬 적습니다</b><p>CV 페이지 구조가 바뀌었을 수 있습니다. 아래 내용을 꼭 확인하고, 이상하면 적용하지 마세요.</p></div>`;
+  const val = v => v ? esc(v) : '(없음)';
+  if (d.added.length) out += `<div class="dhead"><b>새 논문 ${d.added.length}편</b></div><ul class="dlist">${d.added.map(i => `<li><span class="k">${esc(i.section)}</span>${esc(i.title)}</li>`).join('')}</ul>`;
+  if (d.changed.length) out += `<div class="dhead"><b>바뀐 논문 ${d.changed.length}편</b></div><ul class="dlist">${d.changed.map(c => {
+      const sec = c.fields.find(f => f.field === 'section');
+      return `<li><span class="k">${sec ? `${esc(sec.old)} → ${esc(sec.new)}` : '내용 수정'}</span>${esc(c.title)}${c.fields.filter(f => f.field !== 'section').map(f =>
+        `<div class="chg">${FIELD[f.field]}: <s>${val(f.old)}</s> → ${val(f.new)}</div>`).join('')}</li>`; }).join('')}</ul>`;
+  if (d.removed.length) out += `<div class="dhead"><b>CV에 없어서 빠지는 논문 ${d.removed.length}편</b></div><ul class="dlist">${d.removed.map(i => `<li><span class="k">${esc(i.section)}</span>${esc(i.title)}</li>`).join('')}</ul>`;
+  if (d.reordered) out += `<p class="hint" style="margin:6px 0">논문 순서도 CV와 같게 바뀝니다.</p>`;
+  out += `<div class="acts" style="display:flex;gap:8px;margin-top:10px"><button class="btn primary" id="cvApply">CV 내용으로 바꾸기</button><button class="btn" id="cvCancel">취소</button></div>`;
+  box.innerHTML = out;
+  $('#cvCancel').onclick = () => { box.innerHTML = ''; setStatus(''); };
+  $('#cvApply').onclick = () => {
+    D.pubs = r.pubs;
+    const url = $('#cvUrl').value.trim();
+    if (url && r.source === url && url !== cvDefault()) D.site.settings.cv_publications_url = url;   // remember a changed CV address
+    markDirty(); render(); window.scrollTo(0, 0);
+    note('info', `<b>논문 목록을 CV와 맞췄습니다</b><p>새 논문 ${d.added.length} · 바뀐 논문 ${d.changed.length} · 빠진 논문 ${d.removed.length}. <b>저장 + 빌드</b>로 미리보기를 확인한 뒤 <b>GitHub에 배포</b>하세요.</p>`);
+    setStatus('CV 내용으로 바꿨습니다. 저장 + 빌드 후 배포하세요.', 'ok');
+  };
+}
 
 // ---------- GitHub: status, sync, deploy
 const short = s => (s || '').slice(0, 7);

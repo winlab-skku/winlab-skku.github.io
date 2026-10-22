@@ -12,7 +12,8 @@
 
 The server listens on 127.0.0.1 only. Nothing here works from the published site.
 """
-import base64, datetime, hashlib, importlib, importlib.util, json, os, platform, shutil, sys, threading, traceback
+import base64, datetime, hashlib, importlib, importlib.util, json, os, platform, re, shutil, sys, threading, traceback
+import html as htmllib
 import urllib.error, urllib.parse, urllib.request, webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
@@ -397,6 +398,118 @@ def deploy(root, token, message, rebuild):
             "commit_url": f"https://github.com/{OWNER}/{REPO}/commit/{commit['sha']}", "site_url": SITE_URL}
 
 
+# ================================================================ professor's CV site → publications
+
+CV_URL = "https://sites.google.com/view/kisonglee/publications"
+BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+_BLOCK_TAGS = re.compile(r"<\s*/?\s*(?:p|div|li|ul|ol|h[1-6]|br|hr|tr|td|th|table|section|article|header|footer|nav|main|blockquote)\b[^>]*>", re.I)
+_SECTION = re.compile(r"^(?:under review|early access|in press|accepted|\d{4}(?:\s*(?:and|&)\s*(?:before|earlier|prior))?)$", re.I)
+_STOP = re.compile(r"\b(?:journals?|conferences?|proceedings|patents?|books?|workshops?|talks?|awards?|honors?|projects?)\b", re.I)
+_PAPER = re.compile(r'^(?P<authors>.+?)\s*,?\s*[“"](?P<title>.+?)\s*,?\s*[”"]\s*,?\s*(?P<rest>.*)$')
+
+
+def fetch_cv(url):
+    if not re.match(r"^https?://", url or ""):
+        raise ValueError("CV 주소는 https:// 로 시작해야 합니다.")
+    req = urllib.request.Request(url, headers={"User-Agent": BROWSER_UA, "Accept-Language": "en-US,en;q=0.9,ko;q=0.8"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.read().decode(r.headers.get_content_charset() or "utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        raise ValueError(f"CV 페이지를 열 수 없습니다 (HTTP {e.code}). 주소가 맞는지, 페이지가 공개 상태인지 확인하세요.") from None
+    except (urllib.error.URLError, OSError) as e:
+        raise ValueError(f"CV 페이지에 연결할 수 없습니다 ({getattr(e, 'reason', e)}). 인터넷 연결을 확인하세요.") from None
+
+
+def html_to_text(page):
+    """Google Sites HTML → one line per paragraph / list item / heading (inline formatting dropped)."""
+    page = re.sub(r"<(script|style|noscript|svg|template)\b.*?</\1\s*>", " ", page, flags=re.I | re.S)
+    page = re.sub(r"<!--.*?-->", " ", page, flags=re.S)
+    page = _BLOCK_TAGS.sub("\n", page)
+    page = re.sub(r"<[^>]+>", "", page)
+    return htmllib.unescape(page)
+
+
+def _clean(line):
+    line = re.sub(r"\[#h\.[^\]]*\]\([^)]*\)", "", line)       # anchor links when the page was copied as markdown
+    line = re.sub(r"#h\.[0-9a-z]+", "", line, flags=re.I)      # Google Sites heading anchors
+    line = re.sub(r"[\s ​‎﻿]+", " ", line).strip()
+    line = re.sub(r"^#+\s*", "", line)                         # markdown heading marks
+    line = re.sub(r"^\d+[.)]\s+", "", line)                    # list numbers from a copy/paste
+    return line
+
+
+def parse_cv_text(text):
+    """CV page text → {"sections": [...], "items": [{section, authors, title, venue, meta}]}.
+    Starts at the first section heading (Under Review / Early Access / a year / 'YYYY and Before') and
+    stops at the next non-paper heading such as 'Conferences' or 'Patents', so other lists are never mixed in."""
+    sections, items, seen = [], [], set()
+    cur, carry = None, ""
+    for raw in text.splitlines():
+        line = _clean(raw)
+        if not line:
+            continue
+        if carry:                       # a paper whose title was split over two lines
+            line, carry = carry + " " + line, ""
+        if _SECTION.match(line):
+            cur = line
+            if cur not in sections:
+                sections.append(cur)
+            continue
+        if cur is None:
+            continue
+        if line.count("“") > line.count("”"):
+            carry = line
+            continue
+        m = _PAPER.match(line)
+        if m:
+            authors = re.sub(r"\*\s+", "*", m.group("authors")).strip(" ,")
+            title = m.group("title").strip(" ,")
+            rest, meta = m.group("rest").strip(), ""
+            mm = re.match(r"^(.*?)\s*\((IF[^()]*)\)\s*\.?$", rest)
+            if mm:
+                rest, meta = mm.group(1), mm.group(2).strip()
+            key = pub_key(title)
+            if key and key not in seen:
+                seen.add(key)
+                items.append({"section": cur, "authors": authors, "title": title, "venue": rest.strip(" ,"), "meta": meta})
+            continue
+        if line.startswith("(IF") and items and not items[-1]["meta"]:     # IF note on its own line
+            items[-1]["meta"] = line.strip("() ")
+            continue
+        if _STOP.search(line) and len(line) < 80:
+            break                       # e.g. "Conferences", "Domestic Journals": a different list starts
+    sections = [s for s in sections if any(i["section"] == s for i in items)]
+    return {"sections": sections, "items": items}
+
+
+def pub_key(title):
+    return re.sub(r"[^a-z0-9]", "", title.lower())
+
+
+def diff_pubs(cur, new):
+    """What applying `new` would change in `cur`, matched by title."""
+    ci = {pub_key(i["title"]): i for i in cur.get("items", [])}
+    ni = {pub_key(i["title"]): i for i in new["items"]}
+    added = [i for k, i in ni.items() if k not in ci]
+    removed = [i for k, i in ci.items() if k not in ni]
+    changed = []
+    for k, n in ni.items():
+        c = ci.get(k)
+        if c:
+            fields = [{"field": f, "old": c.get(f) or "", "new": n.get(f) or ""}
+                      for f in ("section", "authors", "title", "venue", "meta") if (c.get(f) or "") != (n.get(f) or "")]
+            if fields:
+                changed.append({"title": n["title"], "fields": fields})
+    order = [pub_key(i["title"]) for i in cur.get("items", [])] != [pub_key(i["title"]) for i in new["items"]]
+    reordered = order and not added and not removed and not any(
+        f["field"] == "section" for c in changed for f in c["fields"])
+    counts = {s: sum(1 for i in new["items"] if i["section"] == s) for s in new["sections"]}
+    same = not added and not removed and not changed and not order and cur.get("sections") == new["sections"]
+    return {"added": added, "removed": removed, "changed": changed, "reordered": reordered, "same": same,
+            "counts": counts, "total": len(new["items"]), "current_total": len(cur.get("items", []))}
+
+
 # ================================================================ local server
 
 def load_module(root, name):
@@ -518,7 +631,7 @@ class Handler(SimpleHTTPRequestHandler):
                 return self.send_json({"ok": False, "error": "forbidden"}, 403)
             if path == "/api/data":
                 return self.send_json({"ok": True, "site": read_json("site.json"), "pubs": read_json("publications.json"),
-                                       "root": CTX.root,
+                                       "root": CTX.root, "cv_url": CV_URL,
                                        "photos": sorted(os.listdir(os.path.join(CTX.site, "assets/photos"))),
                                        "research_images": sorted(os.listdir(os.path.join(CTX.site, "assets/research")))})
             if path == "/api/status":
@@ -580,6 +693,21 @@ class Handler(SimpleHTTPRequestHandler):
                 if (repo.get("permissions") or {}).get("push") is False:
                     warn = f"@{login} 계정에 이 저장소 쓰기 권한이 없습니다. 조직(winlab-skku) 멤버로 초대받아야 배포할 수 있습니다."
                 return self.send_json({"ok": True, "login": login, "warning": warn})
+            if path == "/api/cv-import":
+                try:
+                    if (d.get("text") or "").strip():
+                        text, source = d["text"], "붙여넣은 내용"
+                    else:
+                        source = (d.get("url") or CV_URL).strip()
+                        text = html_to_text(fetch_cv(source))
+                except ValueError as e:
+                    return self.send_json({"ok": False, "error": str(e)})
+                parsed = parse_cv_text(text)
+                if not parsed["items"]:
+                    return self.send_json({"ok": False, "error": "CV 페이지에서 논문 목록을 찾지 못했습니다. 주소가 Publications 페이지가 맞는지 확인하세요. "
+                                                                 "계속 안 되면 '직접 붙여넣기'를 사용하세요."})
+                return self.send_json({"ok": True, "source": source, "pubs": parsed,
+                                       "diff": diff_pubs(d.get("current") or {}, parsed)})
             if path == "/api/deploy":
                 tok = load_token()
                 if not tok:
