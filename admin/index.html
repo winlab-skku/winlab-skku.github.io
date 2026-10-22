@@ -10,7 +10,10 @@
   * { box-sizing:border-box; }
   body { margin:0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:#fff; }
   header { background:var(--ink); color:#fff; padding:0 24px; height:56px; display:flex; align-items:center; gap:24px; position:sticky; top:0; z-index:10; }
-  header b { color:var(--accent2); font-size:17px; }
+  header b { color:var(--accent2); font-size:17px; white-space:nowrap; }
+  header > * { flex-shrink:0; }
+  header #root { flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; direction:rtl; text-align:left; }
+  header a, .hbtn { white-space:nowrap; }
   header span { opacity:.6; font-size:13px; }
   header .spacer { flex:1; }
   header a { color:#fff; opacity:.8; text-decoration:none; font-size:14px; }
@@ -53,32 +56,58 @@
   .files { background:var(--panel); border-radius:8px; padding:14px 18px; font-family:ui-monospace, Menlo, Consolas, monospace; font-size:13px; }
   .files li { padding:2px 0; }
   .dirty header b::after { content:" •"; color:#fbbf24; }
-  @media (max-width:800px) { .layout { grid-template-columns:1fr; } nav { display:flex; overflow-x:auto; } nav button.on { border-right:0; border-bottom:3px solid var(--accent); } .bar { left:0; } main { padding:20px; } .row { grid-template-columns:1fr; } }
+  .chip { font-size:12px; padding:3px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.25); opacity:1 !important; white-space:nowrap; }
+  .chip.ok { color:var(--accent2); border-color:rgba(94,234,212,.5); }
+  .chip.warn { color:#fbbf24; border-color:rgba(251,191,36,.55); }
+  .chip.off { color:#c3c8cc; }
+  .hbtn { background:none; border:1px solid rgba(255,255,255,.3); color:#fff; border-radius:5px; padding:4px 10px; font:inherit; font-size:13px; cursor:pointer; }
+  .hbtn:hover { border-color:#fff; }
+  .btn.deploy { background:var(--ink); color:#fff; border-color:var(--ink); font-weight:600; }
+  .btn.deploy:hover { background:#000; color:#fff; }
+  .btn:disabled { opacity:.5; cursor:default; }
+  .note { border:1px solid var(--rule); border-left:4px solid var(--accent); border-radius:8px; padding:12px 16px; margin:0 0 14px; background:#fff; position:relative; }
+  .note.warn { border-left-color:#d97706; background:#fffbeb; }
+  .note.err { border-left-color:var(--danger); background:#fef3f2; }
+  .note.info { border-left-color:var(--accent); background:#f0fdfa; }
+  .note > b { display:block; margin-bottom:4px; }
+  .note p { margin:4px 0; font-size:14px; }
+  .note .x { position:absolute; top:6px; right:8px; border:0; background:none; font-size:18px; color:var(--ink3); cursor:pointer; }
+  .note .acts { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .flist { margin:6px 0 0; padding:0; list-style:none; font-family:ui-monospace, Menlo, Consolas, monospace; font-size:12.5px; max-height:220px; overflow:auto; }
+  .flist li { padding:1px 0; }
+  .flist .k { display:inline-block; min-width:62px; color:var(--ink3); }
+  .steps { margin:8px 0 0 18px; padding:0; font-size:14px; }
+  .steps li { margin:4px 0; }
+  code { font-size:12.5px; background:var(--panel); padding:1px 5px; border-radius:4px; }
+  @media (max-width:800px) { header { gap:12px; padding:0 14px; } header #root, header > span:nth-child(2), .bar .status { display:none; } .layout { grid-template-columns:1fr; } nav { display:flex; overflow-x:auto; } nav button.on { border-right:0; border-bottom:3px solid var(--accent); } .bar { left:0; } main { padding:20px; } .row { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 <header>
   <b>WIn Lab</b><span>Admin</span>
-  <span id="root" style="opacity:.9;font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace;margin-left:12px;padding:3px 8px;border:1px solid rgba(255,255,255,.25);border-radius:4px"></span>
+  <span id="root" title="" style="opacity:.9;font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace;margin-left:4px;padding:3px 8px;border:1px solid rgba(255,255,255,.25);border-radius:4px"></span>
+  <span id="sync" class="chip off">GitHub 확인 중…</span>
   <div class="spacer"></div>
+  <button class="hbtn" id="pull" title="GitHub에 올라온 최신 버전을 이 폴더로 받습니다">최신 받기</button>
   <a href="/" target="_blank">사이트 미리보기 ↗</a>
 </header>
 <div class="layout">
   <nav id="nav"></nav>
-  <main id="main"></main>
+  <main id="main"><div id="notice"></div><div id="content"></div></main>
 </div>
 <div class="bar">
   <div class="status" id="status">불러오는 중…</div>
   <button class="btn" id="reload">되돌리기</button>
   <button class="btn primary" id="save">저장 + 빌드</button>
+  <button class="btn deploy" id="deploy">GitHub에 배포</button>
 </div>
 
 <script>
-let D = null, dirty = false, tab = 'members';
+let D = null, S = null, dirty = false, tab = 'members';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const TABS = [['members','Members'],['pubs','Publications'],['research','Research areas'],['news','News'],['site','Site text & settings']];
+const TABS = [['members','Members'],['pubs','Publications'],['research','Research areas'],['news','News'],['site','Site text & settings'],['github','GitHub 배포']];
 
 function setStatus(msg, cls='') { const s = $('#status'); s.textContent = msg; s.className = 'status ' + cls; }
 function markDirty() { dirty = true; document.body.classList.add('dirty'); setStatus('저장되지 않은 변경사항이 있습니다.'); }
@@ -87,12 +116,12 @@ window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); 
 async function api(path, body) {
   const r = await fetch(path, body ? {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)} : {});
   const j = await r.json();
-  if (!j.ok && body) throw new Error(j.error || 'error');
+  if (!j.ok && body) { const e = new Error(j.error || 'error'); e.data = j; throw e; }
   return j;
 }
 async function load() {
   D = await api('/api/data'); dirty = false; document.body.classList.remove('dirty');
-  $('#root').textContent = '편집 중: ' + D.root; document.title = 'WIn Lab Admin — ' + D.root.split(/[\\/]/).slice(-1)[0];
+  $('#root').textContent = '\u200e편집 중: ' + D.root + '\u200e'; $('#root').title = D.root; document.title = 'WIn Lab Admin — ' + D.root.split(/[\\/]/).slice(-1)[0];
   render(); setStatus('불러왔습니다.');
 }
 
@@ -272,28 +301,178 @@ function renderSite(m) {
 function render() {
   $('#nav').innerHTML = TABS.map(([k, l]) => `<button class="${k===tab?'on':''}" data-tab="${k}">${l}</button>`).join('');
   $('#nav').querySelectorAll('button').forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); window.scrollTo(0,0); });
-  const m = $('#main');
-  ({members: renderMembers, pubs: renderPubs, research: renderResearch, news: renderNews, site: renderSite})[tab](m);
+  const m = $('#content');
+  ({members: renderMembers, pubs: renderPubs, research: renderResearch, news: renderNews, site: renderSite, github: renderGithub})[tab](m);
 }
 
 // ---------- save / build
-$('#save').onclick = async () => {
+async function saveBuild(quiet) {
   setStatus('저장하고 빌드하는 중…');
   try {
-    const r = await api('/api/save', {site: D.site, pubs: D.pubs, build: true});
+    await api('/api/save', {site: D.site, pubs: D.pubs, build: true});
     dirty = false; document.body.classList.remove('dirty');
-    const files = [...new Set(r.written)];
-    setStatus('저장 + 빌드 완료. GitHub에 올릴 파일: ' + files.join(', '), 'ok');
-    const box = document.createElement('div'); box.className = 'card';
-    box.innerHTML = `<b>빌드 완료 — 바뀐 파일 (docs/ 기준). 이 작업 폴더 전체를 GitHub에 올리세요</b><ul class="files" style="margin:10px 0 0">${files.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
-      <p class="hint" style="margin:10px 0 0">이 폴더 전체를 GitHub에 커밋/업로드하면 됩니다 (docs/ 안이 사이트로 게시됩니다). <a href="/" target="_blank">미리보기 ↗</a></p>`;
-    $('#main').prepend(box); window.scrollTo(0,0);
+    setStatus('저장 + 빌드 완료. 미리보기로 확인한 뒤 GitHub에 배포하세요.', 'ok');
+    if (!quiet) {
+      const box = document.createElement('div'); box.className = 'card';
+      box.innerHTML = `<b>빌드 완료</b> — <a href="/" target="_blank">미리보기 ↗</a>에서 확인한 뒤 아래 <b>GitHub에 배포</b>를 누르면 사이트에 올라갑니다.`;
+      $('#content').prepend(box); window.scrollTo(0,0);
+    }
     D.photos = (await api('/api/data')).photos;
-  } catch (e) { setStatus('실패: ' + e.message, 'err'); }
-};
+    await refreshStatus();
+    return true;
+  } catch (e) { setStatus('실패: ' + e.message, 'err'); return false; }
+}
+$('#save').onclick = () => saveBuild(false);
 $('#reload').onclick = () => { if (!dirty || confirm('저장하지 않은 변경사항을 버릴까요?')) load(); };
 document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); $('#save').click(); } });
-load();
+
+// ---------- GitHub: status, sync, deploy
+const short = s => (s || '').slice(0, 7);
+const when = iso => { try { return new Date(iso).toLocaleString('ko-KR', {dateStyle:'medium', timeStyle:'short'}); } catch { return iso || ''; } };
+const KIND = {added:'추가', modified:'수정', deleted:'삭제', 'local-only':'이 폴더만', 'remote-only':'GitHub만', different:'내용 다름'};
+const fileList = items => `<ul class="flist">${items.map(it => typeof it === 'string' ? `<li>${esc(it)}</li>` : `<li><span class="k">${KIND[it.kind] || it.kind}</span>${esc(it.path)}</li>`).join('')}</ul>`;
+
+function note(cls, html, dismissable = true) {
+  const n = document.createElement('div'); n.className = 'note ' + cls;
+  n.innerHTML = (dismissable ? '<button class="x" title="닫기">×</button>' : '') + html;
+  n.querySelector('.x')?.addEventListener('click', () => n.remove());
+  $('#notice').appendChild(n); return n;
+}
+
+async function refreshStatus() {
+  try { S = await api('/api/status'); } catch { return; }
+  const chip = $('#sync'), n = S.pending ? S.pending.length : 0;
+  if (!S.head) { chip.className = 'chip warn'; chip.textContent = S.report && S.report.first_run ? '첫 동기화 선택 필요' : 'GitHub 연결 안 됨 · 로컬 작업'; }
+  else if (n) { chip.className = 'chip warn'; chip.textContent = `배포 대기 ${n}개 · 기준 ${short(S.head.sha)}`; }
+  else { chip.className = 'chip ok'; chip.textContent = `GitHub과 같음 · ${short(S.head.sha)}`; }
+  if (S.report && !S.report.ok && S.head) { chip.className = 'chip off'; chip.textContent = `오프라인 · 기준 ${short(S.head.sha)}`; }
+  chip.title = S.head ? `GitHub 기준 커밋 ${short(S.head.sha)} "${S.head.message}" (${S.head.author}, ${when(S.head.date)})\n마지막 동기화: ${when(S.synced_at)}` : '';
+  const dep = $('#deploy');
+  dep.textContent = n ? `GitHub에 배포 (${n})` : 'GitHub에 배포';
+  dep.disabled = !S.head;
+  if (tab === 'github') renderGithub($('#content'));
+}
+
+function showReport(rep) {
+  if (!rep) return;
+  if (!rep.ok) {
+    note('err', `<b>GitHub과 동기화하지 못했습니다</b><p>${esc(rep.error || '')}</p><p>지금은 이 폴더의 파일로 작업합니다. 인터넷 연결을 확인한 뒤 위의 <b>최신 받기</b>를 눌러 다시 시도하세요.</p>`);
+    return;
+  }
+  const h = rep.head;
+  if (rep.first_run) {
+    const n = note('warn', `<b>처음 실행: 이 폴더와 GitHub이 ${rep.diffs.length}개 파일에서 다릅니다</b>
+      <p>GitHub 최신 버전: ${short(h.sha)} “${esc(h.message)}” (${esc(h.author)}, ${when(h.date)})</p>
+      <p>GitHub에서 방금 받은 폴더라면 <b>GitHub 버전으로 맞추기</b>를, 이 폴더에 아직 배포하지 않은 작업이 있다면 <b>이 폴더 유지</b>를 고르세요. 바뀌는 파일은 <code>_backup/</code>에 먼저 보관됩니다.</p>
+      ${fileList(rep.diffs)}
+      <div class="acts"><button class="btn primary" data-m="take-remote">GitHub 버전으로 맞추기</button><button class="btn" data-m="keep-local">이 폴더 유지 (나중에 배포)</button></div>`, false);
+    n.querySelectorAll('[data-m]').forEach(b => b.onclick = () => runSync(b.dataset.m, n));
+    return;
+  }
+  if (rep.token_invalid) note('warn', `<b>GitHub 토큰이 만료되었거나 잘못되었습니다</b><p>받기는 토큰 없이 했지만, 배포하려면 <b>GitHub 배포</b> 탭에서 새 토큰으로 다시 연결하세요.</p>`);
+  const got = rep.updated.length + rep.deleted.length;
+  if (rep.conflicts.length) {
+    note('warn', `<b>다른 사람이 먼저 배포한 파일과 겹쳐서 GitHub 버전으로 바꿨습니다</b>
+      <p>내 버전은 <code>${esc(rep.backup)}/</code> 폴더에 보관했습니다. 필요한 내용은 다시 입력한 뒤 배포하세요.</p>${fileList(rep.conflicts)}`);
+  }
+  if (got && rep.conflicts.length < got) {
+    note('info', `<b>GitHub에서 최신 버전을 받아왔습니다 (${got}개 파일)</b>
+      <p>${short(h.sha)} “${esc(h.message)}” — ${esc(h.author)}, ${when(h.date)}</p>${fileList([...rep.updated, ...rep.deleted].filter(p => !rep.conflicts.includes(p)))}`);
+  }
+}
+
+async function runSync(mode, noteEl) {
+  setStatus('GitHub과 동기화하는 중…');
+  try {
+    const r = await api('/api/sync', {mode});
+    noteEl?.remove(); $('#notice').innerHTML = '';
+    if ((r.report.updated || []).includes('admin/index.html')) { location.reload(); return; }   // the editor itself was updated
+    showReport(r.report); await load(); await refreshStatus();
+    setStatus('동기화 완료.', 'ok');
+  } catch (e) { $('#notice').innerHTML = ''; showReport(e.data && e.data.report); setStatus('동기화 실패: ' + e.message, 'err'); await refreshStatus(); }
+}
+
+$('#pull').onclick = () => {
+  if (dirty && !confirm('저장하지 않은 편집이 있습니다. 버리고 GitHub 최신 버전을 받을까요?\n(취소하고 먼저 "저장 + 빌드"를 누르면 편집이 유지됩니다)')) return;
+  const n = S && S.pending ? S.pending.length : 0;
+  if (n && !confirm(`배포하지 않은 변경 ${n}개가 있습니다. 다른 사람이 같은 파일을 바꿨다면 GitHub 버전으로 바뀌고 내 버전은 _backup/ 에 보관됩니다. 계속할까요?`)) return;
+  runSync('auto');
+};
+
+$('#deploy').onclick = async () => {
+  if (!S || !S.login) { tab = 'github'; render(); setStatus('배포하려면 먼저 GitHub 토큰을 연결하세요.', 'err'); return; }
+  if (dirty && !(await saveBuild(true))) return;
+  await refreshStatus();
+  const n = S.pending ? S.pending.length : 0;
+  if (!n) { setStatus('배포할 변경이 없습니다. GitHub과 같습니다.', 'ok'); return; }
+  const msg = prompt(`${n}개 파일을 GitHub에 배포합니다. 이번 변경을 한 줄로 적어주세요 (기록용).`, '사이트 업데이트');
+  if (msg === null) return;
+  setStatus('GitHub에 배포하는 중…'); $('#deploy').disabled = true;
+  try {
+    const r = await api('/api/deploy', {message: msg});
+    $('#notice').innerHTML = '';
+    if (r.nothing) note('info', `<b>배포할 변경이 없습니다</b><p>GitHub과 같은 상태입니다.</p>`);
+    else note('info', `<b>배포 완료 (${r.files.length}개 파일)</b>
+      <p>1~2분 뒤 <a href="${esc(r.site_url)}" target="_blank">${esc(r.site_url)}</a> 에 반영됩니다. 바로 안 보이면 Ctrl+Shift+R로 새로고침하세요.</p>
+      <p><a href="${esc(r.commit_url)}" target="_blank">GitHub에서 이번 커밋 보기 ↗</a>${r.pulled.length ? ` · 배포 전에 다른 사람의 변경 ${r.pulled.length}개를 함께 받았습니다.` : ''}</p>${fileList(r.files)}`);
+    setStatus('배포 완료.', 'ok');
+    if (r.pulled && r.pulled.length) await load();
+  } catch (e) {
+    const d = e.data || {};
+    $('#notice').innerHTML = '';
+    if (d.code === 'conflict') note('err', `<b>배포하지 못했습니다: 다른 사람이 같은 파일을 먼저 배포했습니다</b>
+      <p>아무것도 바뀌지 않았습니다. 위의 <b>최신 받기</b>를 누르면 GitHub 버전으로 맞춰지고 내 버전은 <code>_backup/</code>에 보관됩니다. 그다음 내 수정을 다시 입력해서 배포하세요.</p>${fileList(d.files || [])}`);
+    else note('err', `<b>배포하지 못했습니다</b><p>${esc(e.message)}</p>`);
+    setStatus('배포 실패.', 'err');
+  }
+  await refreshStatus(); window.scrollTo(0, 0);
+};
+
+function renderGithub(m) {
+  const s = S || {};
+  const tokenUrl = 'https://github.com/settings/personal-access-tokens/new?' + new URLSearchParams({
+    name: s.token_name || 'WInLab admin', description: `WIn Lab admin page: deploy ${s.repo || ''}`,
+    target_name: (s.repo || 'winlab-skku/').split('/')[0], expires_in: '366', contents: 'write'}).toString();
+  const pend = s.pending || [];
+  m.innerHTML = `<h1>GitHub 배포</h1>
+    <p class="hint">저장소 <a href="https://github.com/${esc(s.repo)}" target="_blank">${esc(s.repo)}</a> · 사이트 <a href="${esc(s.site_url)}" target="_blank">${esc(s.site_url)}</a></p>
+    <h2>이 폴더의 상태</h2>
+    <div class="card">
+      ${s.head ? `<div class="row"><label>GitHub 기준</label><div style="padding-top:6px">${short(s.head.sha)} “${esc(s.head.message)}” — ${esc(s.head.author)}, ${when(s.head.date)}</div></div>
+      <div class="row"><label>마지막 동기화</label><div style="padding-top:6px">${when(s.synced_at)}</div></div>` : `<p class="hint" style="margin:0">아직 GitHub과 동기화하지 않았습니다.</p>`}
+      <div class="row"><label>배포 대기</label><div style="padding-top:6px">${pend.length ? `${pend.length}개 파일 ${fileList(pend)}` : '없음 — GitHub과 같습니다'}</div></div>
+      <div class="tools" style="justify-content:flex-start"><button id="gPull">최신 받기</button></div>
+    </div>
+    <h2>GitHub 연결 (배포용 토큰)</h2>
+    <div class="card" id="tok">
+      ${s.login ? `<p style="margin:0">연결됨: <b>@${esc(s.login)}</b> — 이 PC에서 배포할 수 있습니다.</p>
+        <p class="hint" style="margin:6px 0 0">토큰 저장 위치: <code>${esc(s.token_file)}</code> (프로젝트 폴더 밖이라 GitHub에 올라가지 않습니다)</p>
+        <div class="tools" style="justify-content:flex-start"><button id="tokNew">다른 토큰으로 바꾸기</button><button id="tokClear" class="del">연결 해제</button></div>`
+      : `<p style="margin:0 0 6px">배포하려면 PC마다 한 번, GitHub 토큰을 연결해야 합니다.</p>
+        <ol class="steps">
+          <li><a href="${esc(tokenUrl)}" target="_blank"><b>토큰 만들기 페이지 열기 ↗</b></a> (이름·권한이 미리 채워져 있습니다. GitHub 로그인 필요)</li>
+          <li><b>Repository access</b>에서 <b>Only select repositories</b> → <code>${esc((s.repo || '').split('/')[1] || '')}</code> 선택</li>
+          <li><b>Permissions</b>에 <b>Contents: Read and write</b>가 있는지 확인 → 맨 아래 <b>Generate token</b></li>
+          <li>나온 토큰(<code>github_pat_…</code>)을 복사해서 아래에 붙여넣고 <b>연결</b></li>
+        </ol>
+        <div class="row" style="margin-top:12px"><label>토큰</label><input type="text" id="tokIn" placeholder="github_pat_..." autocomplete="off" spellcheck="false"></div>
+        <div class="tools"><button class="btn primary" id="tokSave">연결</button></div>
+        <p class="hint" style="margin:8px 0 0">토큰은 이 PC의 <code>${esc(s.token_file || '')}</code>에만 저장되고 GitHub 저장소에는 올라가지 않습니다. 유효기간(최대 1년)이 끝나면 같은 방법으로 새로 만들어 연결하세요.
+        조직(winlab-skku)의 Owner가 아니면 토큰이 조직 승인 대기 상태가 될 수 있습니다 — Owner가 조직 Settings → Personal access tokens에서 승인하면 됩니다.</p>`}
+    </div>`;
+  $('#gPull').onclick = () => $('#pull').click();
+  const save = async () => {
+    const t = $('#tokIn').value.trim(); if (!t) return;
+    setStatus('토큰 확인 중…');
+    try { const r = await api('/api/token', {token: t}); setStatus(`연결됨: @${r.login}`, 'ok'); if (r.warning) alert(r.warning); await refreshStatus(); }
+    catch (e) { setStatus('연결 실패: ' + e.message, 'err'); }
+  };
+  if ($('#tokSave')) { $('#tokSave').onclick = save; $('#tokIn').onkeydown = e => { if (e.key === 'Enter') save(); }; }
+  if ($('#tokClear')) $('#tokClear').onclick = async () => { if (!confirm('이 PC에서 GitHub 연결을 해제할까요?')) return; await api('/api/token', {token: ''}); await refreshStatus(); };
+  if ($('#tokNew')) $('#tokNew').onclick = () => { S.login = null; renderGithub(m); };
+}
+
+(async () => { await load(); await refreshStatus(); if (S) showReport(S.report); })();
 </script>
 </body>
 </html>

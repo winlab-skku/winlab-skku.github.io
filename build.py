@@ -33,7 +33,9 @@ def esc(s):
 def write(path, content):
     p = os.path.join(SITE, path)
     os.makedirs(os.path.dirname(p) or ".", exist_ok=True)
-    open(p, "w", encoding="utf-8").write(content)
+    # newline="\n": identical bytes on Windows and macOS, so a rebuild never looks like a change to GitHub
+    with open(p, "w", encoding="utf-8", newline="\n") as f:
+        f.write(content)
 
 
 def slug(s):
