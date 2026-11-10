@@ -24,13 +24,6 @@
     },
     {
       "section": "Under Review",
-      "authors": "Gitae Park, Kanghyun Heo, and *Kisong Lee",
-      "title": "Blockage-Aware UAV-Assisted Wireless Data Harvesting With Building Avoidance",
-      "venue": "Under Major Revision",
-      "meta": ""
-    },
-    {
-      "section": "Under Review",
       "authors": "Hyungwoo Lee, Woongsup Lee, and *Kisong Lee",
       "title": "Blockage-Aware Hierarchical RSMA for UAV Communications: Joint Trajectory and Resource Optimization",
       "venue": "Under Major Revision",
@@ -119,6 +112,20 @@
       "title": "UAV-Enabled MEC Under Building-Induced Blockage: Online Mobility and Resource Control",
       "venue": "Under Review",
       "meta": ""
+    },
+    {
+      "section": "Under Review",
+      "authors": "Ungi Lee, Woongsup Lee, and *Kisong Lee",
+      "title": "Blockage-Aware Age of Packet Minimization for UAV-Enabled Data Collection",
+      "venue": "Under Review",
+      "meta": ""
+    },
+    {
+      "section": "Early Access",
+      "authors": "Gitae Park, Kanghyun Heo, and *Kisong Lee",
+      "title": "Blockage-Aware UAV-Assisted Wireless Data Harvesting With Building Avoidance",
+      "venue": "IEEE Transactions on Wireless Communications, Accepted",
+      "meta": "IF2025: 10.3, Top 3.5%"
     },
     {
       "section": "Early Access",
