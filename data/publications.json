@@ -24,13 +24,6 @@
     },
     {
       "section": "Under Review",
-      "authors": "Hyungwoo Lee, Woongsup Lee, and *Kisong Lee",
-      "title": "Blockage-Aware Hierarchical RSMA for UAV Communications: Joint Trajectory and Resource Optimization",
-      "venue": "Under Major Revision",
-      "meta": ""
-    },
-    {
-      "section": "Under Review",
       "authors": "Chaeyeon Kim and *Kisong Lee",
       "title": "Blockage-Aware Joint Optimization of Mobile Access Point Placement and Resource Allocation for Interference Management in Heterogeneous Networks",
       "venue": "Under Review",
@@ -119,6 +112,13 @@
       "title": "Blockage-Aware Age of Packet Minimization for UAV-Enabled Data Collection",
       "venue": "Under Review",
       "meta": ""
+    },
+    {
+      "section": "Early Access",
+      "authors": "Hyungwoo Lee, Woongsup Lee, and *Kisong Lee",
+      "title": "Blockage-Aware Hierarchical RSMA for UAV Communications: Joint Trajectory and Resource Optimization",
+      "venue": "IEEE Internet of Things Journal, Accepted",
+      "meta": "IF2025: 8.7, Top 5.8%"
     },
     {
       "section": "Early Access",
